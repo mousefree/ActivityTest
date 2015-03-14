@@ -26,14 +26,14 @@
         android:textSize="12sp" />
 
     <Button
-        android:id="@+id/btnTestMenu"
+        android:id="@+id/btnTestAsync"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btnTestSplash"
         android:layout_alignBottom="@+id/btnTestSplash"
         android:layout_toRightOf="@+id/btnTestSplash"
         android:minHeight="30dp"
-        android:text="测试主菜单"
+        android:text="测试异步数据"
         android:textSize="12sp" />
 
     <Button
@@ -43,6 +43,6 @@
         android:layout_below="@+id/btnTestList"
         android:layout_marginTop="20dp"
         android:layout_toLeftOf="@+id/btnTestSplash"
-        android:text="测试代码自定义布局" />
+        android:text="测试主菜单" />
 
 </RelativeLayout>

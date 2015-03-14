@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mouse.test"
     android:versionCode="1"
@@ -28,7 +29,11 @@
         <activity
             android:name=".Test_CustomLayout"
             android:label="测试步局" >
-        </activity>        
+        </activity>
+        <activity
+            android:name=".TestSplash"
+            android:label="@string/title_activity_test_splash" >
+        </activity>
     </application>
 
 </manifest>
