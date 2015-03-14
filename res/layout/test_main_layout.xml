@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    tools:context="mouse.test.Test_Main" >
+
+    <Button
+        android:id="@+id/btnTestList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:minHeight="30dp"
+        android:text="测试List效果"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnTestSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Button01"
+        android:layout_toRightOf="@+id/btnTestList"
+        android:minHeight="30dp"
+        android:text="测试Splash效果"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnTestMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnTestSplash"
+        android:layout_alignBottom="@+id/btnTestSplash"
+        android:layout_toRightOf="@+id/btnTestSplash"
+        android:minHeight="30dp"
+        android:text="测试主菜单"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnTestCustomLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnTestList"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/btnTestSplash"
+        android:text="测试代码自定义布局" />
+
+</RelativeLayout>
