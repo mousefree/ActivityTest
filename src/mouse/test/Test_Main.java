@@ -1,5 +1,6 @@
 package mouse.test;
 
+import mouse.test.asynctask.LoginAsyncTask;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class Test_Main extends Activity {
 /*
@@ -20,11 +23,16 @@ public class Test_Main extends Activity {
 	private Button btnTestSplash;
 	private Button btnTestAsync;
 	private Button btnTestCustomLayout;
+	private TextView tvShow;
+	private ProgressBar pbShow;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_main_layout);
+		
+		tvShow = (TextView)findViewById(R.id.textView1);
+		pbShow = (ProgressBar)findViewById(R.id.progressBar1);
 		
 		btnTestList = (Button)findViewById(R.id.btnTestList);
 		btnTestList.setOnClickListener(btnTestListClick);
@@ -89,6 +97,8 @@ public class Test_Main extends Activity {
 	        Bundle dl = new Bundle();
 	        dl.putString("name","LeiPei");    
 	        intent.putExtras(dl);
+			/* 调用一个新的Activity */ 
+	    	//		startActivityForResult(intent, RESULT_OK);  使用一种可以返回的方法
 	        /* ָ��intentҪ�������� */
 	        intent.setClass(Test_Main.this, Test_List.class);
 	        /* ����һ���µ�Activity */
@@ -105,7 +115,8 @@ public class Test_Main extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+			LoginAsyncTask lat = new LoginAsyncTask(tvShow, pbShow);
+			lat.execute("mouse", "master");
 		}
 		
 	}
