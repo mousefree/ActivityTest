@@ -40,13 +40,6 @@ public class Test_List extends Activity {
 		ListAdapter la1 = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, get_lv1_Data());
 		lv1.setAdapter(la1);
 		
-//		��������ʾ�����ݾ���˵��Ҫ����AdapterView.OnItemClickListener��
-//		�����ṩ�Ĳ��ǣ���������������OnItemClickListener�ϣ���֪������ʵ����һ��view��OnItemClickListener��
-//		����Ϊ�˱���������ֱ��дnew AdapterView.OnItemClickListener(){...}��
-/*
- *    new AdapterView.OnItemClickListener()    ����Ľ����������,ʹ������AdapterView��,�����Ĳ���ʹ��onItemClick�¼�
- *    �������lv1�ǵ�һ����򵥵��б��չʾ,ֻ�ǵ�����������һ���ַ�����չʾ��Ϣ. ArrayAdapter
- */
 		lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -58,10 +51,6 @@ public class Test_List extends Activity {
 			}			
 		});
 		
-		/*
-		 *  lv2 ������һЩ�������ݵ���չ,�����ڽ�����ͬʱ����ʾ����ı���ͼƬ������,ֻ�ǵ�����չʾ,��û��Item�����¼��������,ʹ�ñȽ��ʺ�
-		 *  ����OnItemClick�������¼�,������ʹ��lv2���ַ�ʽ. SimpleAdapter
-		 */
 		lv2 = (ListView)findViewById(R.id.lv2);
 		SimpleAdapter sa1 = new SimpleAdapter(this, get_lv2_Data(), R.layout.custom_simpleadapter, 
 				new String[] {"head", "phone", "date"}, new int[] {R.id.iv_head, R.id.tvPhone, R.id.tvDate});
@@ -75,10 +64,10 @@ public class Test_List extends Activity {
 	
 	private List<String> get_lv1_Data() {
 		lv1_data = new ArrayList<String>(); 
-		lv1_data.add("��������1"); 
-		lv1_data.add("��������2"); 
-		lv1_data.add("��������3"); 
-		lv1_data.add("��������4");           
+		lv1_data.add("数据1"); 
+		lv1_data.add("数据2"); 
+		lv1_data.add("数据3"); 
+		lv1_data.add("数据4");           
         return lv1_data;
 	}
 	

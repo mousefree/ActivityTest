@@ -12,9 +12,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-/*
- *   �����Ԫ��ʾ������δ�����Ʋ��������һЩ�������,Ŀǰ��,ֻ�ܴ���һЩϸ�ڵĶ����ȽϺ�,���ȫ���ô�����������,�������ܴ�
- */
 public class Test_CustomLayout extends Activity {
 
 	private LinearLayout ll;
@@ -59,14 +56,14 @@ public class Test_CustomLayout extends Activity {
 			RelativeLayout.LayoutParams buttonlp = 
 					new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 							ViewGroup.LayoutParams.WRAP_CONTENT);
-			//ˮƽ����
+		
 			buttonlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 			rl1.addView(bt1, buttonlp);
 			
 			RelativeLayout.LayoutParams tvlp = 
 					new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 							ViewGroup.LayoutParams.WRAP_CONTENT);
-			//ˮƽ����
+	
 			tvlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 			tvlp.addRule(RelativeLayout.BELOW, i);
 			

@@ -32,7 +32,7 @@ public class Test_Main extends Activity {
 		setContentView(R.layout.test_main_layout);
 		
 		tvShow = (TextView)findViewById(R.id.textView1);
-		pbShow = (ProgressBar)findViewById(R.id.progressBar1);
+		pbShow = (ProgressBar)findViewById(R.id.progressBar2);
 		
 		btnTestList = (Button)findViewById(R.id.btnTestList);
 		btnTestList.setOnClickListener(btnTestListClick);
@@ -43,17 +43,17 @@ public class Test_Main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/* �½�һ��Intent���� */
+		
 		        Intent intent = new Intent();
 
 		        Bundle dl = new Bundle();
 		        dl.putString("name","LeiPei");    
 		        intent.putExtras(dl);
-		        /* ָ��intentҪ�������� */
+		
 		        intent.setClass(Test_Main.this, TestSplash.class);
-		        /* ����һ���µ�Activity */
+
 		        startActivity(intent);
-		        /* �رյ�ǰ��Activity */
+
 //		        this.finish();				
 			}
 			
@@ -67,17 +67,17 @@ public class Test_Main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/* �½�һ��Intent���� */
+
 		        Intent intent = new Intent();
 
 		        Bundle dl = new Bundle();
 		        dl.putString("name","LeiPei");    
 		        intent.putExtras(dl);
-		        /* ָ��intentҪ�������� */
+
 		        intent.setClass(Test_Main.this, Test_CustomLayout.class);
-		        /* ����һ���µ�Activity */
+
 		        startActivity(intent);
-		        /* �رյ�ǰ��Activity */
+
 //		        this.finish();
 				
 			}
@@ -91,7 +91,7 @@ public class Test_Main extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			/* �½�һ��Intent���� */
+
 	        Intent intent = new Intent();
 
 	        Bundle dl = new Bundle();
@@ -99,11 +99,11 @@ public class Test_Main extends Activity {
 	        intent.putExtras(dl);
 			/* 调用一个新的Activity */ 
 	    	//		startActivityForResult(intent, RESULT_OK);  使用一种可以返回的方法
-	        /* ָ��intentҪ�������� */
+
 	        intent.setClass(Test_Main.this, Test_List.class);
-	        /* ����һ���µ�Activity */
+
 	        startActivity(intent);
-	        /* �رյ�ǰ��Activity */
+
 //	        this.finish();
 
 		}
@@ -115,6 +115,7 @@ public class Test_Main extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			pbShow.setProgress(0);
 			LoginAsyncTask lat = new LoginAsyncTask(tvShow, pbShow);
 			lat.execute("mouse", "master");
 		}
