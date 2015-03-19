@@ -7,5 +7,6 @@
     <string name="title_activity_test__frame_layout">Test_FrameLayout</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_test__navi">Test_Navi</string>
 
 </resources>

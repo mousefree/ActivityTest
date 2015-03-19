@@ -34,7 +34,7 @@
             android:text="CheckBox" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/navi_tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/listBtn"
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/listBtn"
-            android:layout_alignRight="@+id/textView1"
+            android:layout_alignRight="@+id/navi_tv3"
             android:text="TextView" />
 
     </RelativeLayout>

@@ -26,13 +26,14 @@ public class Test_Main extends Activity {
 	private TextView tvShow;
 	private ProgressBar pbShow;
 	private Button btnTestFrameLayout;
+	private Button btnNavi;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_main_layout);
 		
-		tvShow = (TextView)findViewById(R.id.textView1);
+		tvShow = (TextView)findViewById(R.id.navi_tv3);
 		pbShow = (ProgressBar)findViewById(R.id.progressBar2);
 		
 		btnTestList = (Button)findViewById(R.id.btnTestList);
@@ -100,6 +101,27 @@ public class Test_Main extends Activity {
 		    	//		startActivityForResult(intent, RESULT_OK);  使用一种可以返回的方法
 
 		        intent.setClass(Test_Main.this, Test_FrameLayout.class);
+
+		        startActivity(intent);
+			}
+			
+		});
+		
+		btnNavi = (Button)findViewById(R.id.btnNavi);
+		btnNavi.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+		        Intent intent = new Intent();
+
+		        Bundle dl = new Bundle();
+		        dl.putString("name","LeiPei");    
+		        intent.putExtras(dl);
+				/* 调用一个新的Activity */ 
+		    	//		startActivityForResult(intent, RESULT_OK);  使用一种可以返回的方法
+
+		        intent.setClass(Test_Main.this, Test_Navi.class);
 
 		        startActivity(intent);
 			}

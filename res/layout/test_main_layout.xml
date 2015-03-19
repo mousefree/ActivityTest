@@ -46,7 +46,7 @@
         android:text="测试主菜单" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/navi_tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btnTestCustomLayout"
@@ -57,7 +57,7 @@
         android:id="@+id/progressBar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBottom="@+id/navi_tv3"
         android:layout_alignParentRight="true"
         android:layout_marginRight="14dp"
         android:max="10" />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView1"
+        android:layout_alignRight="@+id/navi_tv3"
         android:layout_below="@+id/btnTestCustomLayout"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
@@ -80,7 +80,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btnTestSplash"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/navi_tv3"
         android:text="测试frameLayout布局" />
+
+    <Button
+        android:id="@+id/btnNavi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btnTestCustomLayout"
+        android:layout_below="@+id/btnTestFrameLayout"
+        android:text="测试菜单导航" />
 
 </RelativeLayout>
