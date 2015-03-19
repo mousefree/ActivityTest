@@ -34,6 +34,14 @@
             android:name=".TestSplash"
             android:label="@string/title_activity_test_splash" >
         </activity>
+        <activity
+            android:name=".Test_FrameLayout"
+            android:label="@string/title_activity_test__frame_layout" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
     </application>
 
 </manifest>

@@ -25,6 +25,7 @@ public class Test_Main extends Activity {
 	private Button btnTestCustomLayout;
 	private TextView tvShow;
 	private ProgressBar pbShow;
+	private Button btnTestFrameLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,27 @@ public class Test_Main extends Activity {
 
 //		        this.finish();
 				
+			}
+			
+		});
+		
+		btnTestFrameLayout = (Button)findViewById(R.id.btnTestFrameLayout);
+		btnTestFrameLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+		        Intent intent = new Intent();
+
+		        Bundle dl = new Bundle();
+		        dl.putString("name","LeiPei");    
+		        intent.putExtras(dl);
+				/* 调用一个新的Activity */ 
+		    	//		startActivityForResult(intent, RESULT_OK);  使用一种可以返回的方法
+
+		        intent.setClass(Test_Main.this, Test_FrameLayout.class);
+
+		        startActivity(intent);
 			}
 			
 		});

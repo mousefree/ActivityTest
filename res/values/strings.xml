@@ -4,5 +4,8 @@
     <string name="app_name">ActivityTest</string>
     <string name="title_activity_test_splash">测试splash效果</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test__frame_layout">Test_FrameLayout</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

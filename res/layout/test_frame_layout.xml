@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#897753"
+    >
+
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/ic_launcher"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/icon_konwledge_image"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/test_head"
+        android:visibility="invisible" />
+
+</FrameLayout>

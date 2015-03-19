@@ -75,4 +75,12 @@
         android:max="10"
         android:progress="0" />
 
+    <Button
+        android:id="@+id/btnTestFrameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnTestSplash"
+        android:layout_below="@+id/textView1"
+        android:text="测试frameLayout布局" />
+
 </RelativeLayout>
