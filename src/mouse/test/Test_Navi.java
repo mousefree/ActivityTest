@@ -39,7 +39,8 @@ public class Test_Navi extends Activity {
 		navi_tv4 = (TextView)findViewById(R.id.navi_tv4);
 		navi_tv5 = (TextView)findViewById(R.id.navi_tv5);
 	}
-	
+
+/*	
 	Integer[] mButtonState = { R.drawable.nav_icon_article_f,  
             R.drawable.nav_icon_article_p};  
     Button mButton = (Button) findViewById(R.id.button);  
@@ -48,12 +49,13 @@ public class Test_Navi extends Activity {
     public StateListDrawable setbg(Integer[] mImageIds) {  
             StateListDrawable bg = new StateListDrawable();  
             /*默认背景图*/
-            Drawable normal = this.getResources().getDrawable(mImageIds[0]);  
+//            Drawable normal = this.getResources().getDrawable(mImageIds[0]);  
             /*选择时的背景图*/
-            Drawable selected = this.getResources().getDrawable(mImageIds[1]);  
+//            Drawable selected = this.getResources().getDrawable(mImageIds[1]);  
             /*按下时的背景图*/
-            Drawable pressed = this.getResources().getDrawable(mImageIds[2]);  
+//            Drawable pressed = this.getResources().getDrawable(mImageIds[2]);  
             /*背景图绑定按钮各个状态*/
+/*
             bg.addState(View.PRESSED_ENABLED_STATE_SET, pressed);  
             bg.addState(View.ENABLED_FOCUSED_STATE_SET, selected);  
             bg.addState(View.ENABLED_STATE_SET, normal);  
@@ -61,5 +63,5 @@ public class Test_Navi extends Activity {
             bg.addState(View.EMPTY_STATE_SET, normal);  
             return bg;  
     } 
-	
+*/
 }

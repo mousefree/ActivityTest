@@ -10,30 +10,45 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_color_change"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="TextView" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/bg_640_480" >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:longClickable="true" >
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp" >
+                android:layout_marginTop="5dp"
+                android:duplicateParentState="true" >
 
                 <ImageButton
                     android:id="@+id/navi_imgbtn1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/navi_icon_article" />
+                    android:background="@drawable/nav_icon_article_p" 
+                    android:duplicateParentState="true" />
 
                 <TextView
                     android:id="@+id/navi_tv1"
@@ -41,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/navi_imgbtn1"
                     android:layout_centerHorizontal="true"
+                    android:duplicateParentState="true"
                     android:text="推荐"
                     android:textColor="#4680D1"
                     android:textSize="9sp" />
