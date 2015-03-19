@@ -46,7 +46,7 @@
         android:text="测试主菜单" />
 
     <TextView
-        android:id="@+id/navi_tv3"
+        android:id="@+id/main_tvshow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btnTestCustomLayout"
@@ -80,15 +80,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btnTestSplash"
-        android:layout_below="@+id/navi_tv3"
+        android:layout_below="@+id/btnTestSplash"
         android:text="测试frameLayout布局" />
 
     <Button
         android:id="@+id/btnNavi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/btnTestCustomLayout"
-        android:layout_below="@+id/btnTestFrameLayout"
+        android:layout_alignRight="@+id/btnTestAsync"
+        android:layout_below="@+id/main_tvshow"
         android:text="测试菜单导航" />
 
 </RelativeLayout>

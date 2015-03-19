@@ -33,7 +33,7 @@ public class Test_Main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_main_layout);
 		
-		tvShow = (TextView)findViewById(R.id.navi_tv3);
+		tvShow = (TextView)findViewById(R.id.main_tvshow);
 		pbShow = (ProgressBar)findViewById(R.id.progressBar2);
 		
 		btnTestList = (Button)findViewById(R.id.btnTestList);
