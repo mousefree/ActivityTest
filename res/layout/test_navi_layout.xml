@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_640_480" >
 
@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/nav_icon_article_p" />
+                    android:background="@drawable/navi_icon_article" />
 
                 <TextView
                     android:id="@+id/navi_tv1"
