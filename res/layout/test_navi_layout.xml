@@ -10,15 +10,6 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/title_color_change"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="TextView" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -29,6 +20,7 @@
         android:background="@drawable/bg_640_480" >
 
         <LinearLayout
+            android:id="@+id/navi_ll_button1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -47,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/nav_icon_article_p" 
+                    android:background="@drawable/nav_icon_article_f"
                     android:duplicateParentState="true" />
 
                 <TextView
@@ -58,13 +50,14 @@
                     android:layout_centerHorizontal="true"
                     android:duplicateParentState="true"
                     android:text="推荐"
-                    android:textColor="#4680D1"
                     android:textSize="9sp" />
 
             </RelativeLayout>
 
         </LinearLayout>
-        <LinearLayout
+
+        <LinearLayout
+            android:id="@+id/navi_ll_button2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -79,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/nav_icon_article_p" />
+                    android:background="@drawable/nav_icon_forum_f" />
 
                 <TextView
                     android:id="@+id/navi_tv2"
@@ -87,8 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/navi_imgbtn2"
                     android:layout_centerHorizontal="true"
-                    android:text="推荐"
-                    android:textColor="#4680D1"
+                    android:text="论坛"
                     android:textSize="9sp" />
 
             </RelativeLayout>
@@ -96,6 +88,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/navi_ll_button3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -110,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/nav_icon_article_p" />
+                    android:background="@drawable/nav_icon_findcar_f" />
 
                 <TextView
                     android:id="@+id/navi_tv3"
@@ -118,8 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/navi_imgbtn3"
                     android:layout_centerHorizontal="true"
-                    android:text="推荐"
-                    android:textColor="#4680D1"
+                    android:text="找车"
                     android:textSize="9sp" />
 
             </RelativeLayout>
@@ -127,6 +119,7 @@
         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/navi_ll_button4"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" >
@@ -141,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/nav_icon_article_p" />
+                    android:background="@drawable/nav_icon_sale_f" />
 
                 <TextView
                     android:id="@+id/navi_tv4"
@@ -149,14 +142,15 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/navi_imgbtn4"
                     android:layout_centerHorizontal="true"
-                    android:text="推荐"
-                    android:textColor="#4680D1"
+                    android:text="降价"
                     android:textSize="9sp" />
 
             </RelativeLayout>
 
         </LinearLayout>
-        <LinearLayout
+
+        <LinearLayout
+            android:id="@+id/navi_ll_button5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -171,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/nav_icon_article_p" />
+                    android:background="@drawable/nav_icon_my_f" />
 
                 <TextView
                     android:id="@+id/navi_tv5"
@@ -179,8 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/navi_imgbtn5"
                     android:layout_centerHorizontal="true"
-                    android:text="推荐"
-                    android:textColor="#4680D1"
+                    android:text="我"
                     android:textSize="9sp" />
 
             </RelativeLayout>
