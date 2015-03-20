@@ -72,7 +72,7 @@ public class TempBaseAdapter extends BaseAdapter {
 			holder = new ShowViewItem();
 			holder.demoimageview = (ImageView)convertView.findViewById(mouse.test.R.id.imageView1);
 			holder.phone = (TextView)convertView.findViewById(mouse.test.R.id.navi_tv3);
-			holder.customdate = (TextView)convertView.findViewById(mouse.test.R.id.textView2);
+			holder.customdate = (TextView)convertView.findViewById(mouse.test.R.id.article_fragment_tv1);
 			holder.demobutton = (Button)convertView.findViewById(mouse.test.R.id.listBtn);
 			holder.democheckbox = (CheckBox)convertView.findViewById(mouse.test.R.id.listCheck);
 			convertView.setTag(holder);

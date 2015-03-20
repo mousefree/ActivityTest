@@ -2,11 +2,16 @@ package mouse.test;
 
 import java.util.ArrayList;
 
+import mouse.test.fragment.Main_NaviFragment_article;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +20,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Test_Navi extends Activity {
+
+/*
+ * 今天才搞明白，原来想在activity里面显示fragment，那么需要这个activity从FragmentActivity继承
+ */
+public class Test_Navi extends FragmentActivity {
 
 	private ImageButton navi_imgbtn1;
 	private ImageButton navi_imgbtn2;
@@ -40,6 +49,10 @@ public class Test_Navi extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_navi_layout);
+		
+       Main_NaviFragment_article fragment = new Main_NaviFragment_article();
+        changeFragment(fragment, "article");
+		
 		navi_imgbtn1 = (ImageButton)findViewById(R.id.navi_imgbtn1);
 		navi_imgbtn2 = (ImageButton)findViewById(R.id.navi_imgbtn2);
 		navi_imgbtn3 = (ImageButton)findViewById(R.id.navi_imgbtn3);
@@ -89,6 +102,8 @@ public class Test_Navi extends Activity {
 					//  下面这种方法是通过建立私有类的构造函数，把context传进来设置某个对象的值，也可以使用getBaseContext()，可以达到一样的效果，目前不知道差别是什么。
 					//		navi_tv1.setTextColor(context.getResources().getColor(R.color.title_blue_color));
 					navi_tv1.setTextColor(getBaseContext().getResources().getColor(R.color.title_blue_color));
+				    Main_NaviFragment_article fragment = new Main_NaviFragment_article();
+				    changeFragment(fragment, "article");
 					break;
 			case R.id.navi_ll_button2:
 			case  R.id.navi_imgbtn2:
@@ -130,6 +145,19 @@ public class Test_Navi extends Activity {
 		navi_tv3.setTextColor(getBaseContext().getResources().getColor(R.color.title_black_color));
 		navi_tv4.setTextColor(getBaseContext().getResources().getColor(R.color.title_black_color));
 		navi_tv5.setTextColor(getBaseContext().getResources().getColor(R.color.title_black_color));
+	}
+	
+	private void changeFragment(Fragment f, String data) {
+		/*
+		 * 在程序中加入Fragment，这种是通过程序动态的增加，也可以直接在设计视图上面，增加Fragment
+		 */
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+   
+        fragmentTransaction.replace(R.id.navi_top_ll1, f);
+        Bundle bundle = new Bundle();
+        bundle.putString("data", data);
+        f.setArguments(bundle);
+        fragmentTransaction.commit();
 	}
 }
 

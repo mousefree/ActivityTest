@@ -46,6 +46,10 @@
             android:name=".Test_Navi"
             android:label="@string/title_activity_test__navi" >
         </activity>
+        <activity
+            android:name=".Test_Fragment"
+            android:label="@string/title_activity_test__fragment" >
+        </activity>
     </application>
 
 </manifest>

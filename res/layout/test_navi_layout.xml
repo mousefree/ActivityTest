@@ -5,14 +5,17 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <LinearLayout
+        android:id="@+id/navi_top_ll1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/navi_bottom_ll1"
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/navi_bottom_ll1"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
