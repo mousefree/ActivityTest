@@ -2,21 +2,15 @@ package mouse.test.fragment;
 
 //import mouse.test.R;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import mouse.test.R;
 import mouse.test.adapter.Article_ChildFragment_Adapter;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,7 +24,7 @@ public class Main_NaviFragment_article extends Fragment {
 	
 	private LinearLayout article_fragment_hsv_child;
 	private ViewPager vPager;
-	private List fragmentList;
+	private List<Fragment> fragmentList;
 	//三个一般必须重载的方法
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -53,7 +47,7 @@ public class Main_NaviFragment_article extends Fragment {
 			tv1.setText("我是选项目" + String.valueOf(i));
 			article_fragment_hsv_child.addView(tv1);	
 		}
-		fragmentList = new ArrayList();
+		fragmentList = new ArrayList<Fragment>();
 		Child1_NaviFragment_article child1fragment = new Child1_NaviFragment_article();
 		Child2_NaviFragment_article child2fragment = new Child2_NaviFragment_article();
 		Child3_NaviFragment_article child3fragment = new Child3_NaviFragment_article();
