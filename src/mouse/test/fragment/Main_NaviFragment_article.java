@@ -3,13 +3,17 @@ package mouse.test.fragment;
 //import mouse.test.R;
 import java.util.ArrayList;
 import java.util.List;
+
 import mouse.test.R;
 import mouse.test.adapter.Article_ChildFragment_Adapter;
+import mouse.test.asynctask.LoginAsyncTask;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,6 +49,8 @@ public class Main_NaviFragment_article extends Fragment {
 			TextView tv1 = new TextView(convertView.getContext());
 			tv1.setPadding(15, 15, 15, 15);
 			tv1.setText("我是选项目" + String.valueOf(i));
+			tv1.setTag(i);
+			tv1.setOnClickListener(new LabelOnClickListener(convertView.getContext()));
 			article_fragment_hsv_child.addView(tv1);	
 		}
 		fragmentList = new ArrayList<Fragment>();
@@ -62,7 +68,8 @@ public class Main_NaviFragment_article extends Fragment {
 		
 		vPager = (ViewPager) convertView.findViewById(R.id.viewpager);  
         vPager.setAdapter(new Article_ChildFragment_Adapter(getChildFragmentManager(), fragmentList)); 
-		return convertView;
+		vPager.setCurrentItem(0);
+        return convertView;
     }
 	
     @Override
@@ -88,4 +95,20 @@ public class Main_NaviFragment_article extends Fragment {
         super.onStop();
         System.out.println("ExampleFragment--onStop");
     }	
+    
+	private class LabelOnClickListener implements OnClickListener {
+
+		private Context context;
+		
+		public LabelOnClickListener(Context c) {
+			context = c;
+		}
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			vPager.setCurrentItem(Integer.parseInt(v.getTag().toString()) - 1);
+		}
+		
+	}
 }
