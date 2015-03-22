@@ -43,6 +43,7 @@ public class Test_Navi extends FragmentActivity {
 	private LinearLayout navi_ll_button3;
 	private LinearLayout navi_ll_button4;
 	private LinearLayout navi_ll_button5;
+	private NaviBottomButtonClickListener naviBottomButtonClick;
 	 
 	
 	@Override
@@ -50,8 +51,9 @@ public class Test_Navi extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_navi_layout);
 		
-       Main_NaviFragment_article fragment = new Main_NaviFragment_article();
-        changeFragment(fragment, "article");
+		
+//       Main_NaviFragment_article fragment = new Main_NaviFragment_article();
+//        changeFragment(fragment, "article");
 		
 		navi_imgbtn1 = (ImageButton)findViewById(R.id.navi_imgbtn1);
 		navi_imgbtn2 = (ImageButton)findViewById(R.id.navi_imgbtn2);
@@ -71,18 +73,22 @@ public class Test_Navi extends FragmentActivity {
 		navi_ll_button4 = (LinearLayout)findViewById(R.id.navi_ll_button4);
 		navi_ll_button5 = (LinearLayout)findViewById(R.id.navi_ll_button5);
 		
-		setButtonBackgroundBackImage();
+//		setButtonBackgroundBackImage();
 		
-		navi_ll_button1.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_ll_button2.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_ll_button3.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_ll_button4.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_ll_button5.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_imgbtn1.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_imgbtn2.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_imgbtn3.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_imgbtn4.setOnClickListener(new NaviBottomButtonClickListener(this));
-		navi_imgbtn5.setOnClickListener(new NaviBottomButtonClickListener(this));		
+		naviBottomButtonClick = new NaviBottomButtonClickListener(this);
+		
+		navi_ll_button1.setOnClickListener(naviBottomButtonClick);
+		navi_ll_button2.setOnClickListener(naviBottomButtonClick);
+		navi_ll_button3.setOnClickListener(naviBottomButtonClick);
+		navi_ll_button4.setOnClickListener(naviBottomButtonClick);
+		navi_ll_button5.setOnClickListener(naviBottomButtonClick);
+		navi_imgbtn1.setOnClickListener(naviBottomButtonClick);
+		navi_imgbtn2.setOnClickListener(naviBottomButtonClick);
+		navi_imgbtn3.setOnClickListener(naviBottomButtonClick);
+		navi_imgbtn4.setOnClickListener(naviBottomButtonClick);
+		navi_imgbtn5.setOnClickListener(naviBottomButtonClick);	
+		
+		naviBottomButtonClick.onClick(navi_ll_button1);
 	}
 	
 	private class NaviBottomButtonClickListener implements OnClickListener {
