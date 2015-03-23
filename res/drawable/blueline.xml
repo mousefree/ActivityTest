@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 图形库的内容非常复杂，有好多的属性需要处理，在为知中进行了记录 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="line">
+    <stroke android:width="2dp" android:height="50dp" android:color="@color/title_blue_color"/>
+
+</shape>
