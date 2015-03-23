@@ -14,28 +14,40 @@
             android:id="@+id/article_fragment_hsv_ll1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            
-        <LinearLayout
-            android:id="@+id/article_fragment_hsv_child"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/article_fragment_tv1"
+            <LinearLayout
+                android:id="@+id/article_fragment_hsv_child"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="TextView" />
+                android:orientation="horizontal" >
 
-        </LinearLayout>
-        <ImageView
-        android:id="@+id/cursor"
-        android:layout_width="50dp"
-        android:layout_height="10dp"
-        android:scaleType="matrix"
-        android:background="@drawable/blueline" />"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/article_fragment_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="15dp"
+                        android:text="TextView" />
+
+                    <ImageView
+                        android:id="@+id/cursor"
+                        android:layout_width="50dp"
+                        android:layout_height="10dp"
+                        android:layout_below="@id/article_fragment_tv1"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/blueline" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+"
 
         </LinearLayout>
     </HorizontalScrollView>

@@ -12,6 +12,7 @@ import mouse.test.asynctask.LoginAsyncTask;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -28,6 +29,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /*
@@ -38,7 +40,7 @@ import android.widget.TextView;
 
 public class Main_NaviFragment_article extends Fragment {
 	
-	private LinearLayout article_fragment_hsv_child;
+	private LinearLayout article_fragment_hsv_ll1;
 	private ViewPager vPager;
 	private List<Fragment> fragmentList;
 	private ImageView cursor;
@@ -46,7 +48,8 @@ public class Main_NaviFragment_article extends Fragment {
     private int currIndex = 0;// 当前页卡编号
     private int bmpW;// 动画图片宽度	
     private int oldx = 0;
-    private Map map;
+    private Map<Integer, TextView> textViewMap;
+    private Map<Integer, ImageView> imageViewMap;
 	//三个一般必须重载的方法
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -62,21 +65,66 @@ public class Main_NaviFragment_article extends Fragment {
     {
 			        // Inflate the layout for this fragment
 		View convertView  = inflater.inflate(R.layout.article_main_layout, container, false);
-		article_fragment_hsv_child = (LinearLayout)convertView.findViewById(R.id.article_fragment_hsv_child);
-		cursor = (ImageView) convertView.findViewById(R.id.cursor);
-		InitImageView(convertView);
-		map = new HashMap();
+		article_fragment_hsv_ll1 = (LinearLayout)convertView.findViewById(R.id.article_fragment_hsv_ll1);
+
+		LinearLayout.LayoutParams lp0 = 
+				new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+						ViewGroup.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams lp2 = 
+				new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+						ViewGroup.LayoutParams.MATCH_PARENT);
+		
+//		cursor = (ImageView) convertView.findViewById(R.id.cursor);
+//		InitImageView(convertView);
+		textViewMap = new HashMap();
+		imageViewMap = new HashMap();
 		for(int i = 1; i <=5; i++ ) {
-			final TextView tv1 = new TextView(convertView.getContext());
+			
+			LinearLayout ll1 = new LinearLayout(convertView.getContext());
+			ll1.setOrientation(LinearLayout.HORIZONTAL);
+			
+			article_fragment_hsv_ll1.addView(ll1, lp0);
+			RelativeLayout rl1 = new RelativeLayout(convertView.getContext());
+			ll1.addView(rl1, lp2);
+			
+			TextView tv1 = new TextView(convertView.getContext());
+			textViewMap.put(i, tv1);
 			tv1.setPadding(15, 15, 15, 0);
 			tv1.setText("项目" + String.valueOf(i));
 			tv1.setTag(i);
+			tv1.setId(i);
 			tv1.setOnClickListener(new LabelOnClickListener(convertView.getContext()));
-			article_fragment_hsv_child.addView(tv1);	
+			ImageView iv1 = new ImageView(convertView.getContext());
+			imageViewMap.put(i, iv1);
+			iv1.setBackgroundResource(R.drawable.blueline);
+			
+			if(i > 1){
+				iv1.setVisibility(View.GONE);
+			}
+			
+			RelativeLayout.LayoutParams tvlp = 
+					new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+							ViewGroup.LayoutParams.WRAP_CONTENT);
+		
+			tvlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			rl1.addView(tv1, tvlp);
+						
+			RelativeLayout.LayoutParams ivlp = 
+					new RelativeLayout.LayoutParams(50,10);
+	
+			ivlp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			ivlp.addRule(RelativeLayout.BELOW, i); //这里的i指的是below在哪个控件下面,i指的是控件的id
+			
+			rl1.addView(iv1, ivlp);
+			
+			
+
+			
 			
 			/*
 			 *   下面这段代码，实现的功能是在onCreate方法里面，可以得到布局控件的高度和宽度以及屏幕位置信息，在这个单元没有使用
 			 */
+/*			
 			if(i == 1) {
 				 tv1.post(new Runnable() {
 				        @Override
@@ -87,6 +135,7 @@ public class Main_NaviFragment_article extends Fragment {
 				        }
 				    });
 			}
+*/			
 		}
 		fragmentList = new ArrayList<Fragment>();
 		Child1_NaviFragment_article child1fragment = new Child1_NaviFragment_article();
@@ -104,7 +153,7 @@ public class Main_NaviFragment_article extends Fragment {
 		vPager = (ViewPager) convertView.findViewById(R.id.viewpager);  
         vPager.setAdapter(new Article_ChildFragment_Adapter(getChildFragmentManager(), fragmentList)); 
 		vPager.setCurrentItem(0);
-		vPager.setOnPageChangeListener(new CustomPageChange());
+		vPager.setOnPageChangeListener(new CustomPageChange(convertView.getContext()));
 		return convertView;
     }
 	
@@ -158,11 +207,22 @@ public class Main_NaviFragment_article extends Fragment {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			vPager.setCurrentItem(Integer.parseInt(v.getTag().toString()) - 1);
-			for(int i = 0; i < article_fragment_hsv_child.getChildCount(); i++) {
-				TextView v1 = (TextView)article_fragment_hsv_child.getChildAt(i);
-				v1.setTextColor(context.getResources().getColor(R.color.title_black_color));				
+			for(int i = 1; i <= textViewMap.size(); i++) {
+				TextView tv1 = textViewMap.get(i);
+				tv1.setTextColor(context.getResources().getColor(R.color.title_black_color));				
 			}
 			((TextView) v).setTextColor(context.getResources().getColor(R.color.title_blue_color));
+			
+			for(int i = 1; i <= imageViewMap.size(); i++) {
+				ImageView  iv1 = imageViewMap.get(i);
+				if(Integer.parseInt(v.getTag().toString()) == i) {
+					iv1.setVisibility(View.VISIBLE);
+				}
+				else{
+					iv1.setVisibility(View.GONE);
+				}
+			}
+			
 /*
  * 下面这段代码，是用动作控制图片的移动。
  */
@@ -181,9 +241,13 @@ public class Main_NaviFragment_article extends Fragment {
 	
 	private class CustomPageChange implements OnPageChangeListener {
 
-		int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
-		int two = one * 2;// 页卡1 -> 页卡3 偏移量
-
+//		int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
+//		int two = one * 2;// 页卡1 -> 页卡3 偏移量
+		private Context context;
+		
+		public CustomPageChange(Context c) {
+			context = c;
+		}
 		
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
@@ -198,13 +262,34 @@ public class Main_NaviFragment_article extends Fragment {
 		}
 
 		@Override
-		public void onPageSelected(int arg0) {
+		public void onPageSelected(int index) {
 			// TODO Auto-generated method stub
+/*			
 			Animation animation = new TranslateAnimation(one*currIndex, one*arg0, 0, 0);
 			currIndex = arg0;
 			animation.setFillAfter(true);// True:图片停在动画结束位置
 			animation.setDuration(300);
 			cursor.startAnimation(animation);
+*/			
+			
+			for(int i = 1; i <= textViewMap.size(); i++) {
+				TextView tv1 = textViewMap.get(i);
+				if(i != index + 1)
+					tv1.setTextColor(context.getResources().getColor(R.color.title_black_color));			
+				else
+					tv1.setTextColor(context.getResources().getColor(R.color.title_blue_color));
+			}
+
+			
+			for(int i = 1; i <= imageViewMap.size(); i++) {
+				ImageView  iv1 = imageViewMap.get(i);
+				if(i != index + 1) {
+					iv1.setVisibility(View.GONE);
+				}
+				else{
+					iv1.setVisibility(View.VISIBLE);
+				}
+			}
 		}		
 	}
 }
