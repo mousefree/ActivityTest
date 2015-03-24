@@ -2,5 +2,6 @@
 <resources>
     <color name="title_blue_color">#4680D1</color>
     <color name="title_black_color">#000000</color>
+    <color name="title_while_color">#FFFFFF</color>
     
 </resources>
