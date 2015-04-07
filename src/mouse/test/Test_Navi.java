@@ -2,6 +2,7 @@ package mouse.test;
 
 import java.util.ArrayList;
 
+import mouse.test.custominterface.CustomOnTouchListener;
 import mouse.test.fragment.Main_NaviFragment_article;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -165,6 +167,28 @@ public class Test_Navi extends FragmentActivity {
         f.setArguments(bundle);
         fragmentTransaction.commit();
 	}
+	
+	/** 
+	* 以下的几个方法用来，让fragment能够监听touch事件 
+	*/  
+	private ArrayList<CustomOnTouchListener> onTouchListeners = new ArrayList<CustomOnTouchListener>(  
+	10);  
+	  
+	@Override  
+	public boolean dispatchTouchEvent(MotionEvent ev) {  
+	for (CustomOnTouchListener listener : onTouchListeners) {  
+	listener.onTouch(ev);  
+	}  
+	return super.dispatchTouchEvent(ev);  
+	}  
+	  
+	public void registerCustomOnTouchListener(CustomOnTouchListener myOnTouchListener) {  
+	onTouchListeners.add(myOnTouchListener);  
+	}  
+	  
+	public void unregisterCustomOnTouchListener(CustomOnTouchListener myOnTouchListener) {  
+	onTouchListeners.remove(myOnTouchListener);  
+	}  
 }
 
 /*	
