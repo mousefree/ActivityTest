@@ -5,6 +5,6 @@
     android:useLevel="false">
  
     <solid android:color="@color/title_while_color"/>
-    <size android:width="20dp"
-          android:height="20dp"/>
+    <size android:width="10dp"
+          android:height="10dp"/>
 </shape>

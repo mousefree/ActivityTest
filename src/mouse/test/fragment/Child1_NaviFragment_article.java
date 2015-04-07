@@ -184,16 +184,14 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 				android.view.ViewGroup.LayoutParams para;  
 		        para = iamges[j].getLayoutParams();   
 		          
-		        para.height = 30;  
-		        para.width = 30;  
+		        para.height = 10;  
+		        para.width = 10;  
 		        iamges[j].setLayoutParams(para);  
 				}
 				else{
 					iamges[j].setImageResource(R.drawable.navi_icon_oval);
 					iamges[j].setAlpha(255);
 				}
-					
-				
 			}
 		}	
 }
