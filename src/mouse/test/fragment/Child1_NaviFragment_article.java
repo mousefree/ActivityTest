@@ -1,6 +1,10 @@
 package mouse.test.fragment;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import mouse.test.R;
@@ -22,7 +26,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SimpleAdapter;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -33,6 +39,8 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private Button button;
 	private Context context;
 	private CustomOnTouchListener myOnTouchListener;
+	private ListView lv1;
+	private List<Map<String, Object>>lv1_data;	
 	ImageView []iamges=new ImageView[4];
 	int i = 0;
 	
@@ -49,8 +57,9 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	    {
+
 				        // Inflate the layout for this fragment
-			View convertView  = inflater.inflate(R.layout.article_child1_layout, container, false);
+			View convertView  = inflater.inflate(R.layout.article_child1_headivew_layout, container, false);
 			context = convertView.getContext();
 			iamges[0]=(ImageView) convertView.findViewById(R.id.imageview1);
 			iamges[1]=(ImageView) convertView.findViewById(R.id.imageview2);
@@ -63,6 +72,16 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_marrow));
 			flipper.addView(addImageView(R.drawable.bg_recommend));
 			flipper.addView(addImageView(R.drawable.bg_top));
+			setImage(0);
+			
+			View articleChildl1View = inflater.inflate(R.layout.article_child1_layout, container, false);
+			lv1 = (ListView)articleChildl1View.findViewById(R.id.lv_CarInfo);
+			SimpleAdapter sa1 = new SimpleAdapter(this.getActivity().getApplicationContext(), get_lv1_Data(), R.layout.article_child1_simpleadapter, 
+					new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
+			
+			lv1.addHeaderView(convertView);
+			lv1.setAdapter(sa1);
+			
 //			flipper.addView(addView());	
 		    /* Fragment中，注册 
 		    * 接收MainActivity的Touch回调的对象 
@@ -78,8 +97,25 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 				}  
 			};  
 			((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
-			return convertView;
+//			return convertView;
+			return articleChildl1View;
 	    }
+		
+		private List<Map<String, Object>> get_lv1_Data() {
+			lv1_data = new ArrayList<Map<String, Object>>();
+			for(int i = 1; i < 5; i++){
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("head", R.drawable.test_head);
+				map.put("title", "1500434000" + String.valueOf(i));
+				long time=System.currentTimeMillis();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");  
+				String t=format.format(new Date(time));
+				map.put("date", t);
+				map.put("reply", 50);
+				lv1_data.add(map);
+			}
+			return lv1_data;
+		}
 		
 		private View addImageView(int id) {
 			ImageView iv = new ImageView(context);
@@ -174,13 +210,13 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			
 		}
 		
-		void setImage(int i)
+		private void setImage(int i)
 		{
 			for(int j=0;j<4;j++)
 			{
 				if(j!=i){
 				iamges[j].setImageResource(R.drawable.navi_icon_oval);
-				iamges[j].setAlpha(20);//0~255透明度值 
+				iamges[j].setAlpha(50);//0~255透明度值 
 				android.view.ViewGroup.LayoutParams para;  
 		        para = iamges[j].getLayoutParams();   
 		          

@@ -4,7 +4,7 @@
     android:shape="oval"
     android:useLevel="false">
  
-    <solid android:color="@color/title_while_color"/>
-    <size android:width="10dp"
-          android:height="10dp"/>
+    <solid android:color="@color/title_blue_color"/>
+    <size android:width="5dp"
+          android:height="5dp"/>
 </shape>
