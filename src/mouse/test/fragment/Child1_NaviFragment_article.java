@@ -59,7 +59,14 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	    {
 
 				        // Inflate the layout for this fragment
-			View convertView  = inflater.inflate(R.layout.article_child1_headivew_layout, container, false);
+			
+			View articleChildl1View = inflater.inflate(R.layout.article_child1_layout, container, false);
+			context = inflater.getContext();
+			lv1 = (ListView)articleChildl1View.findViewById(R.id.lv_CarInfo);
+			SimpleAdapter sa1 = new SimpleAdapter(this.context, get_lv1_Data(), R.layout.article_child1_simpleadapter, 
+					new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
+		
+			View convertView  = inflater.inflate(R.layout.article_child1_headivew_layout, lv1, false);
 			context = convertView.getContext();
 			iamges[0]=(ImageView) convertView.findViewById(R.id.imageview1);
 			iamges[1]=(ImageView) convertView.findViewById(R.id.imageview2);
@@ -72,12 +79,8 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_marrow));
 			flipper.addView(addImageView(R.drawable.bg_recommend));
 			flipper.addView(addImageView(R.drawable.bg_top));
-			setImage(0);
+			setImage(0);			
 			
-			View articleChildl1View = inflater.inflate(R.layout.article_child1_layout, container, false);
-			lv1 = (ListView)articleChildl1View.findViewById(R.id.lv_CarInfo);
-			SimpleAdapter sa1 = new SimpleAdapter(this.getActivity().getApplicationContext(), get_lv1_Data(), R.layout.article_child1_simpleadapter, 
-					new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
 			
 			lv1.addHeaderView(convertView);
 			lv1.setAdapter(sa1);
@@ -103,7 +106,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 		
 		private List<Map<String, Object>> get_lv1_Data() {
 			lv1_data = new ArrayList<Map<String, Object>>();
-			for(int i = 1; i < 5; i++){
+			for(int i = 1; i < 25; i++){
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("head", R.drawable.test_head);
 				map.put("title", "1500434000" + String.valueOf(i));
