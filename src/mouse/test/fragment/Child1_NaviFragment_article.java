@@ -22,6 +22,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.ViewParent;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+import android.support.v4.view.ViewPager;
 
 public class Child1_NaviFragment_article extends Fragment implements OnGestureListener {
 
@@ -59,7 +61,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	    {
 
 				        // Inflate the layout for this fragment
-			
+			final ViewGroup vg = container;
 			View articleChildl1View = inflater.inflate(R.layout.article_child1_layout, container, false);
 			context = inflater.getContext();
 			lv1 = (ListView)articleChildl1View.findViewById(R.id.lv_CarInfo);
@@ -81,10 +83,10 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_top));
 			setImage(0);			
 			
-			
 			lv1.addHeaderView(convertView);
 			lv1.setAdapter(sa1);
 			
+//			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
 //			flipper.addView(addView());	
 		    /* Fragment中，注册 
 		    * 接收MainActivity的Touch回调的对象 
@@ -95,10 +97,16 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 
 				@Override  
 				public boolean onTouch(MotionEvent ev) {  
+					vg.requestDisallowInterceptTouchEvent(true);  
+	//		          super.dispatchTouchEvent(ev);  
+	//		          commOnTouchEvent(ev);  //进行子View手势的相应操作  
+	//		          return true;  				
 					boolean result = detector.onTouchEvent(ev);  
 					return result;  
 				}  
 			};  
+//			container.requestDisallowInterceptTouchEvent(true);
+//			((ViewParent) getParentFragment()) .requestDisallowInterceptTouchEvent(true);
 			((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
 //			return convertView;
 			return articleChildl1View;
@@ -186,6 +194,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 				float velocityY) {
 			System.out.println("in------------>>>>>>>");
 			if (e1.getX() - e2.getX() > 120) {
+				
 				if (i < 3) {
 					i++;
 					setImage(i);
