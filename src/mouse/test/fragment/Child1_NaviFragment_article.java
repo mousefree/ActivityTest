@@ -32,7 +32,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import android.support.v4.view.ViewPager;
 
 public class Child1_NaviFragment_article extends Fragment implements OnGestureListener {
 
@@ -83,7 +82,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_top));
 			setImage(0);			
 			
-			lv1.addHeaderView(convertView);
+			lv1.addHeaderView(convertView, null, false);
 			lv1.setAdapter(sa1);
 			
 //			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
@@ -107,7 +106,9 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			};  
 //			container.requestDisallowInterceptTouchEvent(true);
 //			((ViewParent) getParentFragment()) .requestDisallowInterceptTouchEvent(true);
-			((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
+			convertView.onGenericMotionEvent(myOnTouchListener);
+			convertView.setOnTouchListener(myOnTouchListener);
+	//		((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
 //			return convertView;
 			return articleChildl1View;
 	    }
