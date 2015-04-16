@@ -95,8 +95,9 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 
 				@Override  
 				public boolean onTouch(MotionEvent ev) {  
-					boolean result = detector.onTouchEvent(ev);  
-					return result;  
+//					boolean result = detector.onTouchEvent(ev);  
+//					return result;
+					return false;
 				}  
 			};  
 			((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
