@@ -85,14 +85,31 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			
 			lv1.addHeaderView(convertView, null, false);
 			lv1.setAdapter(sa1);
-//			lv1.setOnTouchListener(l);
+			lv1.setOnTouchListener(new OnTouchListener() {
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					//return false;
+					if (event.getY() <= 300){
+						vg.requestDisallowInterceptTouchEvent(true);
+						boolean result = detector.onTouchEvent(event);  
+						return result;  
+					}						
+					else
+					{
+						vg.requestDisallowInterceptTouchEvent(false);
+						return false;
+					}
+				}				
+			});
 //			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
 //			flipper.addView(addView());	
 		    /* Fragment中，注册 
 		    * 接收MainActivity的Touch回调的对象 
 		    * 重写其中的onTouchEvent函数，并进行该Fragment的逻辑处理 
 		    */  
-			
+			/*
 			myOnTouchListener = new CustomOnTouchListener() {  
 
 
@@ -119,7 +136,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 //			container.requestDisallowInterceptTouchEvent(true);
 //			((ViewParent) getParentFragment()) .requestDisallowInterceptTouchEvent(true);
 	    	((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
-    	
+*/    	
 //			return convertView;
 			return articleChildl1View;
 	    }
