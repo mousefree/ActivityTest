@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import mouse.test.R;
+import mouse.test.Test_Navi;
 import mouse.test.adapter.Article_ChildFragment_Adapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

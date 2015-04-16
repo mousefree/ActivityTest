@@ -20,8 +20,10 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.ViewParent;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,7 +33,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-
+ 
 public class Child1_NaviFragment_article extends Fragment implements OnGestureListener {
 
 	private GestureDetector detector;
@@ -59,7 +61,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	    {
 
 				        // Inflate the layout for this fragment
-			
+			final ViewGroup vg = container;
 			View articleChildl1View = inflater.inflate(R.layout.article_child1_layout, container, false);
 			context = inflater.getContext();
 			lv1 = (ListView)articleChildl1View.findViewById(R.id.lv_CarInfo);
@@ -81,26 +83,60 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_top));
 			setImage(0);			
 			
-			
-			lv1.addHeaderView(convertView);
+			lv1.addHeaderView(convertView, null, false);
 			lv1.setAdapter(sa1);
-			
+			lv1.setOnTouchListener(new OnTouchListener() {
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					//return false;
+					if (event.getY() <= 300){
+						vg.requestDisallowInterceptTouchEvent(true);
+						boolean result = detector.onTouchEvent(event);  
+						return result;  
+					}						
+					else
+					{
+						vg.requestDisallowInterceptTouchEvent(false);
+						return false;
+					}
+				}				
+			});
+//			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
 //			flipper.addView(addView());	
 		    /* Fragment中，注册 
 		    * 接收MainActivity的Touch回调的对象 
 		    * 重写其中的onTouchEvent函数，并进行该Fragment的逻辑处理 
 		    */  
+			/*
 			myOnTouchListener = new CustomOnTouchListener() {  
 
 
 				@Override  
-				public boolean onTouch(MotionEvent ev) {  
-//					boolean result = detector.onTouchEvent(ev);  
-//					return result;
-					return false;
+				public boolean onTouch(MotionEvent ev) {
+					Log.d("touchx",String.valueOf(ev.getX()));
+					Log.d("touchy",String.valueOf(ev.getY()));
+					if (ev.getY() <= 300){
+						vg.requestDisallowInterceptTouchEvent(true);
+						boolean result = detector.onTouchEvent(ev);  
+						return result;  
+					}						
+					else
+					{
+						vg.requestDisallowInterceptTouchEvent(false);
+						return false;
+					}
+	//		          super.dispatchTouchEvent(ev);  
+	//		          commOnTouchEvent(ev);  //进行子View手势的相应操作  
+	//		          return true;  				
+
 				}  
 			};  
-			((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
+//			container.requestDisallowInterceptTouchEvent(true);
+//			((ViewParent) getParentFragment()) .requestDisallowInterceptTouchEvent(true);
+	    	((Test_Navi)this.getActivity()).registerCustomOnTouchListener(myOnTouchListener); 
+*/    	
 //			return convertView;
 			return articleChildl1View;
 	    }
@@ -126,6 +162,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			iv.setImageResource(id);
 			return iv;
 		}
+		
 		
 	    @Override
 	    public void onPause()
@@ -186,7 +223,11 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
 			System.out.println("in------------>>>>>>>");
+			Log.d("classname", this.getClass().getName());
+			if(!this.getClass().getName() .equals("mouse.test.fragment.Child1_NaviFragment_article"))
+				return false;
 			if (e1.getX() - e2.getX() > 120) {
+				
 				if (i < 3) {
 					i++;
 					setImage(i);
