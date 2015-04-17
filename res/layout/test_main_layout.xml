@@ -53,28 +53,6 @@
         android:layout_centerHorizontal="true"
         android:text="TextView" />
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/navi_tv3"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="14dp"
-        android:max="10" />
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/navi_tv3"
-        android:layout_below="@+id/btnTestCustomLayout"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:max="10"
-        android:progress="0" />
-
     <Button
         android:id="@+id/btnTestFrameLayout"
         android:layout_width="wrap_content"
@@ -90,5 +68,25 @@
         android:layout_alignRight="@+id/btnTestAsync"
         android:layout_below="@+id/main_tvshow"
         android:text="测试菜单导航" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNavi"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/load_icon_dial2x"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:progress="35"
+        android:progressDrawable="@drawable/load_icon_pointer2x" />
+
+    <Button
+        android:id="@+id/btnNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/progressBar1"
+        android:layout_alignLeft="@+id/btnTestFrameLayout"
+        android:text="修改进度条" />
 
 </RelativeLayout>

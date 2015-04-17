@@ -8,8 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Test_Main extends Activity {
@@ -24,17 +27,40 @@ public class Test_Main extends Activity {
 	private Button btnTestAsync;
 	private Button btnTestCustomLayout;
 	private TextView tvShow;
-	private ProgressBar pbShow;
 	private Button btnTestFrameLayout;
 	private Button btnNavi;
+	private Button btnNum;
+	private ProgressBar pbtest;
+	private int proNum = 35;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_main_layout);
 		
+		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
+		btnNum = (Button)findViewById(R.id.btnNum);
+		btnNum.setText("数据" + proNum);
+		btnNum.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				proNum += 1;
+				pbtest.setProgress(proNum);
+				btnNum.setText("数据" + proNum);
+				Animation rotateAnimation=new RotateAnimation(0, 45);
+
+				rotateAnimation.setDuration(3000);//设置动画持续时间为3秒
+
+				rotateAnimation.setFillAfter(true);//设置动画结束后保持当前的位置（即不返回到动画开始前的位置）
+
+				imgShow.startAnimation(rotateAnimation); 
+			}
+			
+		});
+		
 		tvShow = (TextView)findViewById(R.id.main_tvshow);
-		pbShow = (ProgressBar)findViewById(R.id.progressBar2);
 		
 		btnTestList = (Button)findViewById(R.id.btnTestList);
 		btnTestList.setOnClickListener(btnTestListClick);
@@ -159,8 +185,8 @@ public class Test_Main extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			pbShow.setProgress(0);
-			LoginAsyncTask lat = new LoginAsyncTask(tvShow, pbShow);
+			pbtest.setProgress(0);
+			LoginAsyncTask lat = new LoginAsyncTask(tvShow, pbtest);
 			lat.execute("mouse", "master");
 		}
 		
