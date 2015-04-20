@@ -45,6 +45,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private List<Map<String, Object>>lv1_data;	
 	ImageView []iamges=new ImageView[4];
 	int i = 0;
+	private float starty, endy, movelen; 
 	
 	@Override
 	    public void onCreate(Bundle savedInstanceState)
@@ -68,7 +69,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			SimpleAdapter sa1 = new SimpleAdapter(this.context, get_lv1_Data(), R.layout.article_child1_simpleadapter, 
 					new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
 		
-			View convertView  = inflater.inflate(R.layout.article_child1_headivew_layout, lv1, false);
+			View convertView  = inflater.inflate(R.layout.article_child1_headivew_layout, null);
 			context = convertView.getContext();
 			iamges[0]=(ImageView) convertView.findViewById(R.id.imageview1);
 			iamges[1]=(ImageView) convertView.findViewById(R.id.imageview2);
@@ -82,7 +83,11 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_recommend));
 			flipper.addView(addImageView(R.drawable.bg_top));
 			setImage(0);			
-			
+		
+			int  ch = convertView.getMeasuredHeight();
+			ch = 300;
+			Log.d("height", String.valueOf(ch));
+			convertView.setPadding(0,  -1 * ch, 0, 0);
 			lv1.addHeaderView(convertView, null, false);
 			lv1.setAdapter(sa1);
 			lv1.setOnTouchListener(new OnTouchListener() {
@@ -91,6 +96,24 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 				public boolean onTouch(View v, MotionEvent event) {
 					// TODO Auto-generated method stub
 					//return false;
+					
+					switch(event.getAction()) {
+						case MotionEvent.ACTION_DOWN:
+							starty = event.getY();
+							break;
+						case MotionEvent.ACTION_MOVE:
+							endy = event.getY();
+							if (starty - endy <= 150) {
+								
+							}
+							else {
+								
+							}
+							break;
+						case MotionEvent.ACTION_UP:
+							break;
+					}
+					
 					if (event.getY() <= 300){
 						vg.requestDisallowInterceptTouchEvent(true);
 						boolean result = detector.onTouchEvent(event);  
@@ -102,6 +125,8 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 						
 						return false;
 					}
+
+
 				}				
 			});
 //			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
