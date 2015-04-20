@@ -99,6 +99,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 					else
 					{
 						vg.requestDisallowInterceptTouchEvent(false);
+						
 						return false;
 					}
 				}				
