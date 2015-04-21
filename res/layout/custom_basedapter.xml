@@ -9,7 +9,7 @@
         android:layout_height="wrap_content" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imgShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -40,7 +40,7 @@
             android:layout_alignBaseline="@+id/listBtn"
             android:layout_alignBottom="@+id/listBtn"
             android:layout_marginLeft="26dp"
-            android:layout_toRightOf="@+id/imageView1"
+            android:layout_toRightOf="@+id/imgShow"
             android:text="TextView" />
 
         <TextView

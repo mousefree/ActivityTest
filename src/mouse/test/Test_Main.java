@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +32,8 @@ public class Test_Main extends Activity {
 	private Button btnNavi;
 	private Button btnNum;
 	private ProgressBar pbtest;
-	private int proNum = 35;
+	private int proNum = 0;
+	private ImageView imgShow;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class Test_Main extends Activity {
 		setContentView(R.layout.test_main_layout);
 		
 		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
+		imgShow = (ImageView)findViewById(R.id.imgShow);
 		btnNum = (Button)findViewById(R.id.btnNum);
 		btnNum.setText("数据" + proNum);
 		btnNum.setOnClickListener(new OnClickListener() {
@@ -49,13 +52,13 @@ public class Test_Main extends Activity {
 				proNum += 1;
 				pbtest.setProgress(proNum);
 				btnNum.setText("数据" + proNum);
-				Animation rotateAnimation=new RotateAnimation(0, 45);
+		//		Animation rotateAnimation=new RotateAnimation(0, 45);
 
-				rotateAnimation.setDuration(3000);//设置动画持续时间为3秒
+		//		rotateAnimation.setDuration(3000);//设置动画持续时间为3秒
 
-				rotateAnimation.setFillAfter(true);//设置动画结束后保持当前的位置（即不返回到动画开始前的位置）
+		//		rotateAnimation.setFillAfter(true);//设置动画结束后保持当前的位置（即不返回到动画开始前的位置）
 
-				imgShow.startAnimation(rotateAnimation); 
+		//		imgShow.startAnimation(rotateAnimation); 
 			}
 			
 		});

@@ -78,8 +78,8 @@
         android:background="@drawable/load_icon_dial2x"
         android:indeterminateOnly="false"
         android:max="100"
-        android:progress="35"
-        android:progressDrawable="@drawable/load_icon_pointer2x" />
+        android:progress="0"
+        android:progressDrawable="@anim/animation_progressbar" />
 
     <Button
         android:id="@+id/btnNum"
