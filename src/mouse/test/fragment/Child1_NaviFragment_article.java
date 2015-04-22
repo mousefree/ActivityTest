@@ -28,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -44,6 +45,9 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private ListView lv1;
 	private List<Map<String, Object>>lv1_data;	
 	ImageView []iamges=new ImageView[4];
+	private TextView tvRefreshState;
+	private TextView tvRefreshDate;
+	private ProgressBar pbRefreshImg;
 	int i = 0;
 	private float starty, endy, movelen; 
 	
@@ -69,26 +73,31 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			SimpleAdapter sa1 = new SimpleAdapter(this.context, get_lv1_Data(), R.layout.article_child1_simpleadapter, 
 					new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
 		
-			View convertView  = inflater.inflate(R.layout.article_child1_headivew_layout, null);
-			context = convertView.getContext();
-			iamges[0]=(ImageView) convertView.findViewById(R.id.imageview1);
-			iamges[1]=(ImageView) convertView.findViewById(R.id.imageview2);
-			iamges[2]=(ImageView) convertView.findViewById(R.id.imageview3);
-			iamges[3]=(ImageView) convertView.findViewById(R.id.imageview4);
+			View headView1  = inflater.inflate(R.layout.article_child1_headivew_layout, null);
+			context = headView1.getContext();
+			iamges[0]=(ImageView) headView1.findViewById(R.id.imageview1);
+			iamges[1]=(ImageView) headView1.findViewById(R.id.imageview2);
+			iamges[2]=(ImageView) headView1.findViewById(R.id.imageview3);
+			iamges[3]=(ImageView) headView1.findViewById(R.id.imageview4);
 			
 			detector = new GestureDetector(this);
-			flipper = (ViewFlipper) convertView.findViewById(R.id.ViewFlipper1);
+			flipper = (ViewFlipper) headView1.findViewById(R.id.ViewFlipper1);
 			flipper.addView(addImageView(R.drawable.bg_fulllevel));
 			flipper.addView(addImageView(R.drawable.bg_marrow));
 			flipper.addView(addImageView(R.drawable.bg_recommend));
 			flipper.addView(addImageView(R.drawable.bg_top));
-			setImage(0);			
-		
-			int  ch = convertView.getMeasuredHeight();
+			setImage(0);	
+			
+			View headView2  = inflater.inflate(R.layout.article_child1_refresh_headview_layout, null);			
+			tvRefreshState = (TextView)headView2.findViewById(R.id.tvRefreshState);
+			tvRefreshDate = (TextView)headView2.findViewById(R.id.tvRefreshDate);
+			pbRefreshImg = (ProgressBar)headView2.findViewById(R.id.pbRefreshImg);
+			
+			int  ch = headView2.getMeasuredHeight();
 			ch = 300;
 			Log.d("height", String.valueOf(ch));
-			convertView.setPadding(0,  -1 * ch, 0, 0);
-			lv1.addHeaderView(convertView, null, false);
+			headView2.setPadding(0,  -1 * ch, 0, 0);
+			lv1.addHeaderView(headView1, null, false);
 			lv1.setAdapter(sa1);
 			lv1.setOnTouchListener(new OnTouchListener() {
 
@@ -103,11 +112,14 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 							break;
 						case MotionEvent.ACTION_MOVE:
 							endy = event.getY();
-							if (starty - endy <= 150) {
-								
+							float i = 0;
+							i = starty - endy;
+							if (i <= 160) {
+								pbRefreshImg.setProgress((int) (i / 2));
+								tvRefreshState.setText("向下拉将刷新数据");
 							}
 							else {
-								
+								tvRefreshState.setText("松开手将刷新数据");
 							}
 							break;
 						case MotionEvent.ACTION_UP:

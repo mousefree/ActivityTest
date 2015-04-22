@@ -18,7 +18,7 @@
         android:id="@+id/tvReply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignLeft="@+id/tvRefreshDate"
         android:layout_alignTop="@+id/imgShow"
         android:background="@drawable/corner_view"
         android:text="4.6.6 for Android"
@@ -26,7 +26,7 @@
         android:textSize="10sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvRefreshDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imgShow"

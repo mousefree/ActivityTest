@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tvRefreshDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvRefreshState"
+            android:layout_below="@+id/tvRefreshState"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvRefreshState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_toRightOf="@+id/pbRefreshImg"
+            android:text="TextView" />
+
+        <ProgressBar
+            android:id="@+id/pbRefreshImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvRefreshDate"
+            android:layout_marginLeft="97dp"
+            android:background="@drawable/load_icon_dial2x"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateOnly="false"
+            android:max="80"
+            android:progress="0"
+            android:progressDrawable="@drawable/load_icon_pointer2x" />
+
+    </RelativeLayout>
+
+</LinearLayout>
