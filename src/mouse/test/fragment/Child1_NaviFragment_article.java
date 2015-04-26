@@ -20,10 +20,13 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.ViewParent;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,6 +53,8 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private ProgressBar pbRefreshImg;
 	int i = 0;
 	private float starty, endy, movelen; 
+	private View headView1, headView2; 
+	private int headView1Height, headView2Height;
 	
 	@Override
 	    public void onCreate(Bundle savedInstanceState)
@@ -73,7 +78,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			SimpleAdapter sa1 = new SimpleAdapter(this.context, get_lv1_Data(), R.layout.article_child1_simpleadapter, 
 					new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
 		
-			View headView1  = inflater.inflate(R.layout.article_child1_headivew_layout, null);
+			headView1  = inflater.inflate(R.layout.article_child1_headivew_layout, null);
 			context = headView1.getContext();
 			iamges[0]=(ImageView) headView1.findViewById(R.id.imageview1);
 			iamges[1]=(ImageView) headView1.findViewById(R.id.imageview2);
@@ -88,45 +93,48 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			flipper.addView(addImageView(R.drawable.bg_top));
 			setImage(0);	
 			
-			View headView2  = inflater.inflate(R.layout.article_child1_refresh_headview_layout, null);			
+			headView2  = inflater.inflate(R.layout.article_child1_refresh_headview_layout, null);			
 			tvRefreshState = (TextView)headView2.findViewById(R.id.tvRefreshState);
 			tvRefreshDate = (TextView)headView2.findViewById(R.id.tvRefreshDate);
 			pbRefreshImg = (ProgressBar)headView2.findViewById(R.id.pbRefreshImg);
 			
-			int  ch = headView2.getMeasuredHeight();
-			ch = 300;
-			Log.d("height", String.valueOf(ch));
-			headView2.setPadding(0,  -1 * ch, 0, 0);
+
+			lv1.addHeaderView(headView2, null, false);
 			lv1.addHeaderView(headView1, null, false);
 			lv1.setAdapter(sa1);
+			
+			measureView(headView1);
+			measureView(headView2);
+/*			
+			ViewTreeObserver observer = headView1.getViewTreeObserver();    
+			observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {    
+			           @Override    
+			           public void onGlobalLayout() {    
+			        	   headView1.getViewTreeObserver().removeGlobalOnLayoutListener(this);    
+			//    final int w = view.getMeasuredWidth();  
+			            headView1Height = headView1.getMeasuredHeight();  
+			           }    
+			       }); 			
+*/			
+			headView1Height = headView1.getMeasuredHeight();
+			Log.d("headView1Height", String.valueOf(headView1Height));
+			headView2Height = headView2.getMeasuredHeight();
+	//		ch = 300;
+			Log.d("headView2Height", String.valueOf(headView2Height));
+			headView2.setPadding(0,  -1 * headView2Height, 0, 0);			
+			
+
 			lv1.setOnTouchListener(new OnTouchListener() {
 
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					// TODO Auto-generated method stub
 					//return false;
+					float i = 0;
 					
-					switch(event.getAction()) {
-						case MotionEvent.ACTION_DOWN:
-							starty = event.getY();
-							break;
-						case MotionEvent.ACTION_MOVE:
-							endy = event.getY();
-							float i = 0;
-							i = starty - endy;
-							if (i <= 160) {
-								pbRefreshImg.setProgress((int) (i / 2));
-								tvRefreshState.setText("向下拉将刷新数据");
-							}
-							else {
-								tvRefreshState.setText("松开手将刷新数据");
-							}
-							break;
-						case MotionEvent.ACTION_UP:
-							break;
-					}
+
 					
-					if (event.getY() <= 300){
+					if (event.getY() <= headView1Height){
 						vg.requestDisallowInterceptTouchEvent(true);
 						boolean result = detector.onTouchEvent(event);  
 						return result;  
@@ -134,11 +142,40 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 					else
 					{
 						vg.requestDisallowInterceptTouchEvent(false);
-						
-						return false;
+						switch(event.getAction()) {
+						case MotionEvent.ACTION_DOWN:
+							starty = event.getY();
+							break;
+						case MotionEvent.ACTION_MOVE:
+							endy = event.getY();
+							Log.d("x", String.valueOf(starty));
+							Log.d("y", String.valueOf(endy));
+							i = endy - starty;
+							if (i > 0) {
+							if (i <= headView2Height) {
+								headView2.setPadding(0, (int) i, 0, 0);
+								pbRefreshImg.setProgress((int) (i));
+								tvRefreshState.setText("向下拉将刷新数据");
+							}
+							else {
+								headView2.setPadding(0, headView2Height, 0, 0);
+								pbRefreshImg.setProgress((int) i);
+								tvRefreshState.setText("松开手将刷新数据");
+							}
+							}
+							break;
+						case MotionEvent.ACTION_UP:
+							endy = event.getY();
+							i = endy - starty;
+							if (i > headView2Height) {
+								
+							//	pbRefreshImg.setProgress(80);
+							}
+							headView2.setPadding(0, -1 * headView2Height, 0, 0);
+							break;
+						}						
+						return true;
 					}
-
-
 				}				
 			});
 //			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
@@ -178,6 +215,25 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 //			return convertView;
 			return articleChildl1View;
 	    }
+		
+		private void measureView(View child) {
+			ViewGroup.LayoutParams p = child.getLayoutParams();
+			if (p == null) {
+				p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+						ViewGroup.LayoutParams.WRAP_CONTENT);
+			}
+			int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
+			int lpHeight = p.height;
+			int childHeightSpec;
+			if (lpHeight > 0) {
+				childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
+						MeasureSpec.EXACTLY);
+			} else {
+				childHeightSpec = MeasureSpec.makeMeasureSpec(0,
+						MeasureSpec.UNSPECIFIED);
+			}
+			child.measure(childWidthSpec, childHeightSpec);
+		}
 		
 		private List<Map<String, Object>> get_lv1_Data() {
 			lv1_data = new ArrayList<Map<String, Object>>();
