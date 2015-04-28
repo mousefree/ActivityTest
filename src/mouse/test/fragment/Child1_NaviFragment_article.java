@@ -122,7 +122,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	//		ch = 300;
 			Log.d("headView2Height", String.valueOf(headView2Height));
 			headView2.setPadding(0,  -1 * headView2Height, 0, 0);			
-			
+			pbRefreshImg.setMax(headView2Height);
 
 			lv1.setOnTouchListener(new OnTouchListener() {
 
@@ -131,7 +131,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 					// TODO Auto-generated method stub
 					//return false;
 					float i = 0;
-					
+					float j = 0;
 
 					
 					if (event.getY() <= headView1Height){
@@ -152,23 +152,27 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 							Log.d("y", String.valueOf(endy));
 							i = endy - starty;
 							if (i > 0) {
-							if (i <= headView2Height) {
-								headView2.setPadding(0, (int) i, 0, 0);
-								pbRefreshImg.setProgress((int) (i));
-								tvRefreshState.setText("向下拉将刷新数据");
-							}
-							else {
-								headView2.setPadding(0, headView2Height, 0, 0);
-								pbRefreshImg.setProgress((int) i);
-								tvRefreshState.setText("松开手将刷新数据");
-							}
+								headView2.setPadding(0, (int) (-1 * headView2Height + i), 0, 0);
+								j = headView2Height / 2;
+								if(i - j >= 0){
+									if(i - j <= headView2Height) {
+										pbRefreshImg.setProgress((int) (i - j));
+										tvRefreshState.setText("向下拉将刷新数据");
+									}
+									else {
+										pbRefreshImg.setProgress(headView2Height);
+										tvRefreshState.setText("松开手将刷新数据");
+									}
+								}
+							Log.d("i", String.valueOf(i));
 							}
 							break;
 						case MotionEvent.ACTION_UP:
 							endy = event.getY();
 							i = endy - starty;
-							if (i > headView2Height) {
-								
+							j = headView2Height / 2;
+							if (i - j >= headView2Height) {
+								//刷新数据
 							//	pbRefreshImg.setProgress(80);
 							}
 							headView2.setPadding(0, -1 * headView2Height, 0, 0);

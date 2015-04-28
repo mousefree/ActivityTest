@@ -4,5 +4,5 @@
     android:pivotX="50%"  
     android:pivotY="50%"  
     android:fromDegrees="-6"  
-    android:toDegrees="340" />
+    android:toDegrees="280" />
 

@@ -37,7 +37,7 @@
             android:indeterminateOnly="false"
             android:max="80"
             android:progress="0"
-            android:progressDrawable="@drawable/load_icon_pointer2x" />
+            android:progressDrawable="@anim/animation_progressbar" />
 
     </RelativeLayout>
 
