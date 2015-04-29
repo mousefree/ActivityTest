@@ -13,6 +13,8 @@ import mouse.test.adapter.Article_ChildFragment_Adapter;
 import mouse.test.custominterface.CustomOnTouchListener;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -55,6 +57,19 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private float starty, endy, movelen; 
 	private View headView1, headView2; 
 	private int headView1Height, headView2Height;
+	
+	//因为涉及到handler数据处理，为方便我们定义如下常量
+	private final static int REFRESH_BACKING = 0;      //反弹中
+	private final static int REFRESH_BACED = 1;        //达到刷新界限，反弹结束后
+	private final static int REFRESH_RETURN = 2;       //没有达到刷新界限，返回
+	private final static int REFRESH_DONE = 3;         //加载数据结束	
+	
+	
+	private final static int NONE_PULL_REFRESH = 0;   //正常状态
+	private final static int ENTER_PULL_REFRESH = 1;  //进入下拉刷新状态
+	private final static int OVER_PULL_REFRESH = 2;   //进入松手刷新状态
+	private final static int EXIT_PULL_REFRESH = 3;     //松手后反弹后加载状态
+	private int mPullRefreshState = 0;  
 	
 	@Override
 	    public void onCreate(Bundle savedInstanceState)
@@ -170,12 +185,38 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 						case MotionEvent.ACTION_UP:
 							endy = event.getY();
 							i = endy - starty;
+							if(i > 0) {
 							j = headView2Height / 2;
 							if (i - j >= headView2Height) {
 								//刷新数据
 							//	pbRefreshImg.setProgress(80);
 							}
-							headView2.setPadding(0, -1 * headView2Height, 0, 0);
+							new Thread() {
+			                    public void run() {
+			                    	Message msg;
+			                    	movelen = headView2.getPaddingTop();
+									while(headView2.getPaddingTop() > -1 * headView2Height) {
+//										headView2.setPadding(0, (int) endy--, 0, 0);
+										msg = mHandler.obtainMessage();
+			                            msg.what = REFRESH_BACKING;
+			                            mHandler.sendMessage(msg);
+			                            try {
+			                                sleep(2);//慢一点反弹，别一下子就弹回去了
+			                            } catch (InterruptedException e) {
+			                                e.printStackTrace();
+			                            }
+			                        }
+			                        msg = mHandler.obtainMessage();
+			                        if (mPullRefreshState == OVER_PULL_REFRESH) {
+			                            msg.what = REFRESH_BACED;//加载数据完成，结束返回
+			                        } else {
+			                            msg.what = REFRESH_RETURN;//未达到刷新界限，直接返回
+			                        }
+			                        mHandler.sendMessage(msg);
+			                    };
+			                }.start();							
+
+							}
 							break;
 						}						
 						return true;
@@ -219,6 +260,72 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 //			return convertView;
 			return articleChildl1View;
 	    }
+		
+		private Handler mHandler = new Handler(){
+		    @Override
+		    public void handleMessage(Message msg) {
+		        switch (msg.what) {
+		        case REFRESH_BACKING:
+		            headView2.setPadding(headView2.getPaddingLeft(),
+		                    (int) (movelen--),
+		                    headView2.getPaddingRight(),
+		                    headView2.getPaddingBottom());
+		            break;
+		        case REFRESH_BACED:
+/*
+		        	mHeaderTextView.setText("正在加载...");
+		            mHeaderProgressBar.setVisibility(View.VISIBLE);
+		            mHeaderPullDownImageView.setVisibility(View.GONE);
+		            mHeaderReleaseDownImageView.setVisibility(View.GONE);
+		            mPullRefreshState = EXIT_PULL_REFRESH;
+		            new Thread() {
+		                public void run() {
+		                    sleep(2000);//处理后台加载数据
+		                    Message msg = mHandler.obtainMessage();
+		                    msg.what = REFRESH_DONE;
+		                    //通知主线程加载数据完成
+		                    mHandler.sendMessage(msg);
+		                };
+		            }.start();
+		       */
+		            break;
+		        case REFRESH_RETURN:
+		            //未达到刷新界限，返回
+		        	/*
+		            mHeaderTextView.setText("下拉刷新");
+		            mHeaderProgressBar.setVisibility(View.INVISIBLE);
+		            mHeaderPullDownImageView.setVisibility(View.VISIBLE);
+		            mHeaderReleaseDownImageView.setVisibility(View.GONE);
+		            mHeaderLinearLayout.setPadding(mHeaderLinearLayout.getPaddingLeft(),
+		                    0,
+		                    mHeaderLinearLayout.getPaddingRight(),
+		                    mHeaderLinearLayout.getPaddingBottom());
+		            mPullRefreshState = NONE_PULL_REFRESH;
+		            setSelection(1);
+		            */
+		            break;
+		        case REFRESH_DONE:
+		            //刷新结束后，恢复原始默认状态
+		        	/*
+		            mHeaderTextView.setText("下拉刷新");
+		            mHeaderProgressBar.setVisibility(View.INVISIBLE);
+		            mHeaderPullDownImageView.setVisibility(View.VISIBLE);
+		            mHeaderReleaseDownImageView.setVisibility(View.GONE);
+		            mHeaderUpdateText.setText(getContext().getString(R.string.app_list_header_refresh_last_update, 
+		                    mSimpleDateFormat.format(new Date())));
+		            mHeaderLinearLayout.setPadding(mHeaderLinearLayout.getPaddingLeft(),
+		                    0,
+		                    mHeaderLinearLayout.getPaddingRight(),
+		                    mHeaderLinearLayout.getPaddingBottom());
+		            mPullRefreshState = NONE_PULL_REFRESH;
+		            setSelection(1);
+		            */
+		            break;
+		        default:
+		            break;
+		        }
+		    }
+		};		
 		
 		private void measureView(View child) {
 			ViewGroup.LayoutParams p = child.getLayoutParams();
