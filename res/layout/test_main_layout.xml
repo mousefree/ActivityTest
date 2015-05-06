@@ -89,4 +89,14 @@
         android:layout_alignLeft="@+id/btnTestFrameLayout"
         android:text="修改进度条" />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNavi"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/btnNum"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@anim/animation_loading" />
+
 </RelativeLayout>

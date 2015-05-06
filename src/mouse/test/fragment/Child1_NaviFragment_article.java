@@ -197,6 +197,10 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			                    	movelen = headView2.getPaddingTop();
 									while(headView2.getPaddingTop() > -1 * headView2Height) {
 //										headView2.setPadding(0, (int) endy--, 0, 0);
+										if(headView2.getPaddingTop() <= headView2Height) {
+											int x = headView2.getPaddingTop();
+											pbRefreshImg.setProgress(x);
+										}
 										msg = mHandler.obtainMessage();
 			                            msg.what = REFRESH_BACKING;
 			                            mHandler.sendMessage(msg);
