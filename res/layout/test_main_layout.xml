@@ -81,22 +81,30 @@
         android:progress="0"
         android:progressDrawable="@anim/animation_progressbar" />
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnNum"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/btnNum" />
+
     <Button
         android:id="@+id/btnNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/pbRefreshImg"
-        android:layout_alignLeft="@+id/btnTestFrameLayout"
+        android:layout_alignTop="@+id/progressBar1"
+        android:layout_toRightOf="@+id/progressBar1"
         android:text="修改进度条" />
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
+    <Button
+        android:id="@+id/btnRefresh"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnNavi"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@+id/btnNum"
-        android:indeterminateOnly="false"
-        android:progressDrawable="@anim/animation_loading" />
+        android:layout_alignBaseline="@+id/btnNum"
+        android:layout_alignBottom="@+id/btnNum"
+        android:layout_alignRight="@+id/btnTestFrameLayout"
+        android:text="刷新动画" />
 
 </RelativeLayout>

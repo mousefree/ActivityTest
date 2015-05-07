@@ -138,7 +138,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			Log.d("headView2Height", String.valueOf(headView2Height));
 			headView2.setPadding(0,  -1 * headView2Height, 0, 0);			
 			pbRefreshImg.setMax(headView2Height);
-
+			
 			lv1.setOnTouchListener(new OnTouchListener() {
 
 				@Override
@@ -181,6 +181,9 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 								}
 							Log.d("i", String.valueOf(i));
 							}
+							else {
+								return false;
+							}
 							break;
 						case MotionEvent.ACTION_UP:
 							endy = event.getY();
@@ -220,6 +223,10 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			                    };
 			                }.start();							
 
+							}
+							else
+							{
+								return false;
 							}
 							break;
 						}						

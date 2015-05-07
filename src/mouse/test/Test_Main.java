@@ -3,6 +3,7 @@ package mouse.test;
 import mouse.test.asynctask.LoginAsyncTask;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,9 @@ public class Test_Main extends Activity {
 	private ProgressBar pbtest;
 	private int proNum = 0;
 	private ImageView imgShow;
+	private ImageView iv1Show;
+	private Button btnRefresh;
+	private AnimationDrawable animationDrawable; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class Test_Main extends Activity {
 		
 		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
 		imgShow = (ImageView)findViewById(R.id.imgShow);
+		iv1Show = (ImageView)findViewById(R.id.imageView1);
 		btnNum = (Button)findViewById(R.id.btnNum);
 		btnNum.setText("数据" + proNum);
 		btnNum.setOnClickListener(new OnClickListener() {
@@ -153,6 +158,19 @@ public class Test_Main extends Activity {
 		        intent.setClass(Test_Main.this, Test_Navi.class);
 
 		        startActivity(intent);
+			}
+			
+		});
+		
+		btnRefresh = (Button)findViewById(R.id.btnRefresh);
+		btnRefresh.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				iv1Show.setImageResource(R.anim.animation_loading);         
+				animationDrawable = (AnimationDrawable) iv1Show.getDrawable();  
+				animationDrawable.start(); 
 			}
 			
 		});
