@@ -1,3 +1,13 @@
+/*
+ * 这个类里面实现了两个功能的核心代码，在以后使用的时候，最好的方式是做成单独继承ListView来使用。以下收藏一些链接地址，方便以后
+ * 使用的时候进行查阅
+ * http://blog.csdn.net/janronehoo/article/details/7259955
+ * http://blog.csdn.net/toyuexinshangwan/article/details/8194044
+ * http://blog.csdn.net/cherry609195946/article/details/8843712
+ * http://www.cnblogs.com/shang53880/p/3442014.html
+ * http://www.cnblogs.com/xiaoran1129/archive/2012/07/04/2576221.html
+ */
+
 package mouse.test.fragment;
 
 import java.sql.Date;
@@ -12,6 +22,7 @@ import mouse.test.Test_Navi;
 import mouse.test.adapter.Article_ChildFragment_Adapter;
 import mouse.test.custominterface.CustomOnTouchListener;
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,6 +41,8 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,9 +66,11 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private TextView tvRefreshState;
 	private TextView tvRefreshDate;
 	private ProgressBar pbRefreshImg;
+	private ImageView iv_Bottom_Refresh_Icon;
+	private TextView tv_Bottom_Refresh_Text;
 	int i = 0;
 	private float starty, endy, movelen; 
-	private View headView1, headView2; 
+	private View headView1, headView2, footView1; 
 	private int headView1Height, headView2Height;
 	
 	//因为涉及到handler数据处理，为方便我们定义如下常量
@@ -70,6 +85,9 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	private final static int OVER_PULL_REFRESH = 2;   //进入松手刷新状态
 	private final static int EXIT_PULL_REFRESH = 3;     //松手后反弹后加载状态
 	private int mPullRefreshState = 0;  
+	
+	private int lastIndex, countRecord;
+	private AnimationDrawable animationDrawable;
 	
 	@Override
 	    public void onCreate(Bundle savedInstanceState)
@@ -113,11 +131,15 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			tvRefreshDate = (TextView)headView2.findViewById(R.id.tvRefreshDate);
 			pbRefreshImg = (ProgressBar)headView2.findViewById(R.id.pbRefreshImg);
 			
+			footView1 = inflater.inflate(R.layout.article_child1_loading_bottomview_layout, null);
+			iv_Bottom_Refresh_Icon = (ImageView)footView1.findViewById(R.id.iv_Bottom_Refresh_Icon);
+			tv_Bottom_Refresh_Text = (TextView)footView1.findViewById(R.id.tv_Bottom_Refresh_Text);
 
 			lv1.addHeaderView(headView2, null, false);
 			lv1.addHeaderView(headView1, null, false);
-			lv1.setAdapter(sa1);
 			
+			lv1.setAdapter(sa1);
+
 			measureView(headView1);
 			measureView(headView2);
 /*			
@@ -180,10 +202,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 									}
 								}
 							Log.d("i", String.valueOf(i));
-							}
-							else {
-								return false;
-							}
+							};
 							break;
 						case MotionEvent.ACTION_UP:
 							endy = event.getY();
@@ -223,16 +242,38 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 			                    };
 			                }.start();							
 
-							}
-							else
-							{
-								return false;
-							}
+							};
 							break;
 						}						
-						return true;
+						return false;
 					}
 				}				
+			});
+			
+			lv1.setOnScrollListener(new OnScrollListener() {
+
+				@Override
+				public void onScrollStateChanged(AbsListView view,
+						int scrollState) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onScroll(AbsListView view, int firstVisibleItem,
+						int visibleItemCount, int totalItemCount) {
+					// TODO Auto-generated method stub
+					lastIndex = lv1.getLastVisiblePosition();
+					countRecord = totalItemCount;
+					if(lastIndex == countRecord) {
+						lv1.addFooterView(footView1);
+						iv_Bottom_Refresh_Icon.setImageResource(R.anim.animation_loading);         
+						animationDrawable = (AnimationDrawable) iv_Bottom_Refresh_Icon.getDrawable();  
+						animationDrawable.start(); 
+						tv_Bottom_Refresh_Text.setText("数据刷新中，请稍候。。。");
+					}
+				}
+				
 			});
 //			((ViewParent) getParentFragment()).requestDisallowInterceptTouchEvent(true);
 //			flipper.addView(addView());	
@@ -359,7 +400,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 		
 		private List<Map<String, Object>> get_lv1_Data() {
 			lv1_data = new ArrayList<Map<String, Object>>();
-			for(int i = 1; i < 25; i++){
+			for(int i = 1; i < 10; i++){
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("head", R.drawable.test_head);
 				map.put("title", "1500434000" + String.valueOf(i));
@@ -439,6 +480,8 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
 			System.out.println("in------------>>>>>>>");
+			if(e1 == null || e2 == null)
+				return false;
 			Log.d("classname", this.getClass().getName());
 			if(!this.getClass().getName() .equals("mouse.test.fragment.Child1_NaviFragment_article"))
 				return false;

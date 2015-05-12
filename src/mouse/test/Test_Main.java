@@ -46,7 +46,7 @@ public class Test_Main extends Activity {
 		
 		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
 		imgShow = (ImageView)findViewById(R.id.imgShow);
-		iv1Show = (ImageView)findViewById(R.id.imageView1);
+		iv1Show = (ImageView)findViewById(R.id.iv_Bottom_Refresh_Icon);
 		btnNum = (Button)findViewById(R.id.btnNum);
 		btnNum.setText("数据" + proNum);
 		btnNum.setOnClickListener(new OnClickListener() {
