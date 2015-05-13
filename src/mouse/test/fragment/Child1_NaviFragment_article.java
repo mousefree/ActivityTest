@@ -88,6 +88,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 	
 	private int lastIndex, countRecord;
 	private AnimationDrawable animationDrawable;
+	private boolean isAddFoot = false;
 	
 	@Override
 	    public void onCreate(Bundle savedInstanceState)
@@ -189,14 +190,16 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 							Log.d("y", String.valueOf(endy));
 							i = endy - starty;
 							if (i > 0) {
-								headView2.setPadding(0, (int) (-1 * headView2Height + i), 0, 0);
+//								headView2.setPadding(0, (int) (-1 * headView2Height + i), 0, 0);
 								j = headView2Height / 2;
 								if(i - j >= 0){
 									if(i - j <= headView2Height) {
+										headView2.setPadding(0, (int) (-1 * headView2Height + i), 0, 0);
 										pbRefreshImg.setProgress((int) (i - j));
 										tvRefreshState.setText("向下拉将刷新数据");
 									}
 									else {
+										headView2.setPadding(0, headView2.getPaddingTop(), 0, 0);										
 										pbRefreshImg.setProgress(headView2Height);
 										tvRefreshState.setText("松开手将刷新数据");
 									}
@@ -263,10 +266,13 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 				public void onScroll(AbsListView view, int firstVisibleItem,
 						int visibleItemCount, int totalItemCount) {
 					// TODO Auto-generated method stub
-					lastIndex = lv1.getLastVisiblePosition();
+					lastIndex = lv1.getLastVisiblePosition() + 1;
 					countRecord = totalItemCount;
-					if(lastIndex == countRecord) {
+					Log.i("lastIndex", String.valueOf(lastIndex));
+					Log.i("countRecord", String.valueOf(countRecord));
+					if(lastIndex == countRecord && !isAddFoot) {
 						lv1.addFooterView(footView1);
+						isAddFoot = true;
 						iv_Bottom_Refresh_Icon.setImageResource(R.anim.animation_loading);         
 						animationDrawable = (AnimationDrawable) iv_Bottom_Refresh_Icon.getDrawable();  
 						animationDrawable.start(); 
