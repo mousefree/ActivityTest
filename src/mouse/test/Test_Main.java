@@ -171,6 +171,11 @@ public class Test_Main extends Activity {
 				iv1Show.setImageResource(R.anim.animation_loading);         
 				animationDrawable = (AnimationDrawable) iv1Show.getDrawable();  
 				animationDrawable.start(); 
+				animationDrawable.stop();
+				 Intent intent = new Intent();
+				 intent.setClass(Test_Main.this, Test_CustomView.class);
+
+			     startActivity(intent);
 			}
 			
 		});
