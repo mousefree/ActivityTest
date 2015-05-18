@@ -14,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.MeasureSpec;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -21,7 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class CustomListView extends ListView {
+public class CustomListView extends ListView implements OnScrollListener {
 
 	private ViewFlipper flipper;
 	private TextView tvRefreshState;
@@ -66,6 +68,7 @@ public class CustomListView extends ListView {
 	 */
 	private Boolean IsShowLoadingFootView;
 	private OnRefreshListener mOnRefreshListener;           // 刷新监听器
+//	private OnScrollListener mOnScrollListener;             // 列表滚动监听器  
 	
 	public CustomListView(Context context) {
 		super(context);
@@ -81,9 +84,9 @@ public class CustomListView extends ListView {
 	private void Init(Context context) {
 		inflater = LayoutInflater.from(context);
 		headView1 = inflater.inflate(R.layout.refresh_headview_layout, null);
-		tvRefreshState = (TextView)headView2.findViewById(R.id.tvRefreshState);
-		tvRefreshDate = (TextView)headView2.findViewById(R.id.tvRefreshDate);
-		pbRefreshImg = (ProgressBar)headView2.findViewById(R.id.pbRefreshImg);
+		tvRefreshState = (TextView)headView1.findViewById(R.id.tvRefreshState);
+		tvRefreshDate = (TextView)headView1.findViewById(R.id.tvRefreshDate);
+		pbRefreshImg = (ProgressBar)headView1.findViewById(R.id.pbRefreshImg);
 		
 		headView2  = inflater.inflate(R.layout.navi_img_headivew_layout, null);
 		flipper = (ViewFlipper) headView2.findViewById(R.id.ViewFlipper1);
@@ -96,6 +99,7 @@ public class CustomListView extends ListView {
 		footView1 = inflater.inflate(R.layout.loading_bottomview_layout, null);
 		iv_Bottom_Refresh_Icon = (ImageView)footView1.findViewById(R.id.iv_Bottom_Refresh_Icon);
 		tv_Bottom_Refresh_Text = (TextView)footView1.findViewById(R.id.tv_Bottom_Refresh_Text);
+	//	super.setOnScrollListener(this);
 	}
 	
 	 @Override  
@@ -115,7 +119,7 @@ public class CustomListView extends ListView {
 				i = endy - starty;
 				if (i > 0) {
 //					headView2.setPadding(0, (int) (-1 * headView2Height + i), 0, 0);
-					j = headView1Height / 2;
+					j = headView1Height / RATIO;
 					if(i - j >= 0){
 						if(i - j <= headView1Height) {
 							headView1.setPadding(0, (int) (-1 * headView1Height + i), 0, 0);
@@ -345,7 +349,7 @@ public class CustomListView extends ListView {
 	public void setIsShowRefreshHeadView(boolean isShowRefreshHeadView) {
 		IsShowRefreshHeadView = isShowRefreshHeadView;
 		if(isShowRefreshHeadView) {
-			this.addHeaderView(headView1, null, false);
+			addHeaderView(headView1, null, false);
 			measureView(headView1);
 			headView1Height = headView1.getMeasuredHeight();
 			headView1.setPadding(0,  -1 * headView1Height, 0, 0);			
@@ -359,5 +363,31 @@ public class CustomListView extends ListView {
 
 	public void setIsShowLoadingFootView(Boolean isShowLoadingFootView) {
 		IsShowLoadingFootView = isShowLoadingFootView;
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		// TODO Auto-generated method stub
+		if(IsShowLoadingFootView) {
+			lastIndex = getLastVisiblePosition() + 1;
+			countRecord = totalItemCount;
+			Log.i("lastIndex", String.valueOf(lastIndex));
+			Log.i("countRecord", String.valueOf(countRecord));
+			if(lastIndex == countRecord && !isAddFoot) {
+				addFooterView(footView1);
+				isAddFoot = true;
+				iv_Bottom_Refresh_Icon.setImageResource(R.anim.animation_loading);         
+				animationDrawable = (AnimationDrawable) iv_Bottom_Refresh_Icon.getDrawable();  
+				animationDrawable.start(); 
+				tv_Bottom_Refresh_Text.setText("数据刷新中，请稍候。。。");
+			}
+		}
 	}
 }
