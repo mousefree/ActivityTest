@@ -100,6 +100,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 		iv_Bottom_Refresh_Icon = (ImageView)footView1.findViewById(R.id.iv_Bottom_Refresh_Icon);
 		tv_Bottom_Refresh_Text = (TextView)footView1.findViewById(R.id.tv_Bottom_Refresh_Text);
 	//	super.setOnScrollListener(this);
+		
 	}
 	
 	 @Override  
@@ -254,7 +255,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 	        mOnRefreshListener = onRefreshListener;  
 	    } 
 	
-	private View addImageView(int id) {
+	private ImageView addImageView(int id) {
 		ImageView iv = new ImageView(getContext());
 		iv.setImageResource(id);
 		return iv;
@@ -293,8 +294,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 						ViewGroup.LayoutParams.WRAP_CONTENT);
 		lp0.setMargins(0, 0, 10, 0);
 		imgList = new ImageView[source.length];
-		for(int i = 0; i < source.length; i++){
-			flipper.addView(addImageView(source[i]));		
+		for(int i = 0; i < source.length; i++) {
+			flipper.addView(addImageView(source[i]));	
+			imgList[i] = new ImageView(getContext());
 			imgContainer.addView(imgList[i], lp0);
 		}		
 		setImage(0);
@@ -363,6 +365,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 
 	public void setIsShowLoadingFootView(Boolean isShowLoadingFootView) {
 		IsShowLoadingFootView = isShowLoadingFootView;
+		setOnScrollListener(this);
 	}
 
 	@Override
