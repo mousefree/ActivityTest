@@ -26,8 +26,8 @@ public class Test_CustomView extends Activity {
 		clv.setIsShowRefreshHeadView(true);
 		clv.setIsShowLoadingFootView(true);
 		clv.setIsShowNaviImgHeadView(true);
-		clv.SetNaviImg(new int[] {R.drawable.bg_fulllevel, R.drawable.bg_marrow, 
-				R.drawable.bg_recommend, R.drawable.bg_top});
+		clv.SetNaviImg(new int[] {R.drawable.car1, R.drawable.car2, 
+				R.drawable.car3, R.drawable.car4, R.drawable.car5});
 		SimpleAdapter sa1 = new SimpleAdapter(this.getBaseContext(), get_lv1_Data(), R.layout.article_child1_simpleadapter, 
 				new String[] {"head", "title", "date", "reply"}, new int[] {R.id.iv_head, R.id.tvTitle, R.id.tvDate, R.id.tvReply});
 		clv.setAdapter(sa1);		

@@ -455,6 +455,7 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 		public boolean onDown(MotionEvent e) {
 			// TODO Auto-generated method stub
 			return false;
+	//		return true;
 		}
 
 		@Override
@@ -539,5 +540,5 @@ public class Child1_NaviFragment_article extends Fragment implements OnGestureLi
 					iamges[j].setAlpha(255);
 				}
 			}
-		}	
+		}
 }
