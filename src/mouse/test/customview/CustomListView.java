@@ -137,8 +137,8 @@ public class CustomListView extends ListView implements OnScrollListener {
 				case MotionEvent.ACTION_UP:
 					if (isMove) {
 						endx = event.getX();
-						if (endx > startx) {
-							if (endx - startx > 120) {
+						if (endx < startx) {
+							if (endx - startx < -120) {
 								if (currentIndexImg < imgList.length - 1) {
 									currentIndexImg++;
 								} else {
@@ -156,7 +156,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 						}
 						else
 						{
-							if (endx - startx < -120) {
+							if (endx - startx > 120) {
 								if (currentIndexImg > 0) {
 									currentIndexImg--;
 								} else {
@@ -213,7 +213,6 @@ public class CustomListView extends ListView implements OnScrollListener {
 							}
 							Log.d("i", String.valueOf(i));
 						}
-						;
 						break;
 					case MotionEvent.ACTION_UP:
 						endy = event.getY();
