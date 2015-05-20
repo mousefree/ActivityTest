@@ -26,10 +26,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-public class CustomListView extends ListView implements OnScrollListener,
-		OnGestureListener {
-
-	private GestureDetector detector;
+public class CustomListView extends ListView implements OnScrollListener {
+	//,
+//		OnGestureListener {
+//	private GestureDetector detector;
 	private ViewFlipper flipper;
 	private TextView tvRefreshState;
 	private TextView tvRefreshDate;
@@ -48,6 +48,8 @@ public class CustomListView extends ListView implements OnScrollListener,
 	private LinearLayout imgContainer;
 	private ImageView[] imgList;
 	private float starty, endy, movelen;
+	private float startx, endx, movelenx;
+	private boolean isMove; //确定有横向移动.
 	// 因为涉及到handler数据处理，为方便我们定义如下常量
 	private final static int REFRESH_BACKING = 0; // 反弹中
 	private final static int REFRESH_BACED = 1; // 达到刷新界限，反弹结束后
@@ -88,7 +90,7 @@ public class CustomListView extends ListView implements OnScrollListener,
 
 	private void Init(Context context) {
 		inflater = LayoutInflater.from(context);
-		detector = new GestureDetector(this);
+//		detector = new GestureDetector(this);
 		headView1 = inflater.inflate(R.layout.refresh_headview_layout, null);
 		tvRefreshState = (TextView) headView1.findViewById(R.id.tvRefreshState);
 		tvRefreshDate = (TextView) headView1.findViewById(R.id.tvRefreshDate);
@@ -123,91 +125,142 @@ public class CustomListView extends ListView implements OnScrollListener,
 		headview2getpivoty = headView2.getMeasuredHeight();
 		if (event.getY() <= headview2getpivoty) {
 			if (IsShowNaviImgHeadView) {
-			//	requestDisallowInterceptTouchEvent(true);
+//				requestDisallowInterceptTouchEvent(true);
+				switch(event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					startx = event.getX();
+					isMove = false;
+					break;
+				case MotionEvent.ACTION_MOVE:
+						isMove = true;
+					break;
+				case MotionEvent.ACTION_UP:
+					if (isMove) {
+						endx = event.getX();
+						if (endx > startx) {
+							if (endx - startx > 120) {
+								if (currentIndexImg < imgList.length - 1) {
+									currentIndexImg++;
+								} else {
+									currentIndexImg = 0;
+								}
+								setImage(currentIndexImg);
+								flipper.setInAnimation(AnimationUtils
+										.loadAnimation(getContext(),
+												R.anim.animation_right_in));
+								flipper.setOutAnimation(AnimationUtils
+										.loadAnimation(getContext(),
+												R.anim.animation_left_out));
+								flipper.showNext();
+							}
+						}
+						else
+						{
+							if (endx - startx < -120) {
+								if (currentIndexImg > 0) {
+									currentIndexImg--;
+								} else {
+									currentIndexImg = imgList.length - 1;
+								}
+								setImage(currentIndexImg);
+								this.flipper.setInAnimation(AnimationUtils
+										.loadAnimation(getContext(),
+												R.anim.animation_left_in));
+								this.flipper.setOutAnimation(AnimationUtils
+										.loadAnimation(getContext(),
+												R.anim.animation_right_out));
+								this.flipper.showPrevious();
+							}
+						}
+					}
+					isMove = false;
+					break;
+				}
+/*
+				requestDisallowInterceptTouchEvent(true);
 				boolean result = detector.onTouchEvent(event);
 				return result;
-			}
-			else{
-				if (this.IsShowRefreshHeadView) {
-					//	requestDisallowInterceptTouchEvent(false);
-						switch (event.getAction()) {
-						case MotionEvent.ACTION_DOWN:
-							starty = event.getY();
-							break;
-						case MotionEvent.ACTION_MOVE:
-							endy = event.getY();
-							Log.d("x", String.valueOf(starty));
-							Log.d("y", String.valueOf(endy));
-							i = endy - starty;
-							if (i > 0) {
-								// headView2.setPadding(0, (int) (-1 * headView2Height +
-								// i), 0, 0);
-								j = headView1Height / RATIO;
-								if (i - j >= 0) {
-									if (i - j <= headView1Height) {
-										headView1.setPadding(0, (int) (-1
-												* headView1Height + i), 0, 0);
-										pbRefreshImg.setProgress((int) (i - j));
-										tvRefreshState.setText("向下拉将刷新数据");
-									} else {
-										headView1.setPadding(0,
-												headView1.getPaddingTop(), 0, 0);
-										pbRefreshImg.setProgress(headView1Height);
-										tvRefreshState.setText("松开手将刷新数据");
-									}
-								}
-								Log.d("i", String.valueOf(i));
-							}
-							;
-							break;
-						case MotionEvent.ACTION_UP:
-							endy = event.getY();
-							i = endy - starty;
-							if (i > 0) {
-								j = headView1Height / 2;
-								if (i - j >= headView1Height) {
-									// 刷新数据
-									// pbRefreshImg.setProgress(80);
-								}
-								new Thread() {
-									public void run() {
-										Message msg;
-										movelen = headView1.getPaddingTop();
-										while (headView1.getPaddingTop() > -1
-												* headView1Height) {
-											// headView2.setPadding(0, (int) endy--, 0,
-											// 0);
-											if (headView1.getPaddingTop() <= headView1Height) {
-												int x = headView1.getPaddingTop();
-												pbRefreshImg.setProgress(x);
-											}
-											msg = mHandler.obtainMessage();
-											msg.what = REFRESH_BACKING;
-											mHandler.sendMessage(msg);
-											try {
-												sleep(2);// 慢一点反弹，别一下子就弹回去了
-											} catch (InterruptedException e) {
-												e.printStackTrace();
-											}
-										}
-										msg = mHandler.obtainMessage();
-										if (mPullRefreshState == OVER_PULL_REFRESH) {
-											msg.what = REFRESH_BACED;// 加载数据完成，结束返回
-										} else {
-											msg.what = REFRESH_RETURN;// 未达到刷新界限，直接返回
-										}
-										mHandler.sendMessage(msg);
-									};
-								}.start();
-							}
-							break;
-						}
-					}				
-				return super.onTouchEvent(event);
+*/				
 			}
 		} else {
-			return super.onTouchEvent(event);
+			if (this.IsShowRefreshHeadView) {
+//					requestDisallowInterceptTouchEvent(false);
+					switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						starty = event.getY();
+						break;
+					case MotionEvent.ACTION_MOVE:
+						endy = event.getY();
+						Log.d("x", String.valueOf(starty));
+						Log.d("y", String.valueOf(endy));
+						i = endy - starty;
+						if (i > 0) {
+							// headView2.setPadding(0, (int) (-1 * headView2Height +
+							// i), 0, 0);
+							j = headView1Height / RATIO;
+							if (i - j >= 0) {
+								if (i - j <= headView1Height) {
+									headView1.setPadding(0, (int) (-1
+											* headView1Height + i), 0, 0);
+									pbRefreshImg.setProgress((int) (i - j));
+									tvRefreshState.setText("向下拉将刷新数据");
+								} else {
+									headView1.setPadding(0,
+											headView1.getPaddingTop(), 0, 0);
+									pbRefreshImg.setProgress(headView1Height);
+									tvRefreshState.setText("松开手将刷新数据");
+								}
+							}
+							Log.d("i", String.valueOf(i));
+						}
+						;
+						break;
+					case MotionEvent.ACTION_UP:
+						endy = event.getY();
+						i = endy - starty;
+						if (i > 0) {
+							j = headView1Height / 2;
+							if (i - j >= headView1Height) {
+								// 刷新数据
+								// pbRefreshImg.setProgress(80);
+							}
+							new Thread() {
+								public void run() {
+									Message msg;
+									movelen = headView1.getPaddingTop();
+									while (headView1.getPaddingTop() > -1
+											* headView1Height) {
+										// headView2.setPadding(0, (int) endy--, 0,
+										// 0);
+										if (headView1.getPaddingTop() <= headView1Height) {
+											int x = headView1.getPaddingTop();
+											pbRefreshImg.setProgress(x);
+										}
+										msg = mHandler.obtainMessage();
+										msg.what = REFRESH_BACKING;
+										mHandler.sendMessage(msg);
+										try {
+											sleep(2);// 慢一点反弹，别一下子就弹回去了
+										} catch (InterruptedException e) {
+											e.printStackTrace();
+										}
+									}
+									msg = mHandler.obtainMessage();
+									if (mPullRefreshState == OVER_PULL_REFRESH) {
+										msg.what = REFRESH_BACED;// 加载数据完成，结束返回
+									} else {
+										msg.what = REFRESH_RETURN;// 未达到刷新界限，直接返回
+									}
+									mHandler.sendMessage(msg);
+								};
+							}.start();
+						}
+						break;
+					}
+		//			return true;
+				}				
 		}		
+		return super.onTouchEvent(event);
 	}
 
 	private Handler mHandler = new Handler() {
@@ -416,6 +469,7 @@ public class CustomListView extends ListView implements OnScrollListener,
 		}
 	}
 
+/*	
 	@Override
 	public boolean onDown(MotionEvent e) {
 		// TODO Auto-generated method stub
@@ -497,4 +551,6 @@ public boolean dispatchTouchEvent(MotionEvent event)
      }
      return super.dispatchTouchEvent(event);
 }
+
+*/
 }
