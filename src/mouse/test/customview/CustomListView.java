@@ -222,6 +222,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 							if (i - j >= headView1Height) {
 								// 刷新数据
 								// pbRefreshImg.setProgress(80);
+								if (mOnRefreshListener != null) {  
+									mOnRefreshListener.onRefresh();  
+						        }
 							}
 							new Thread() {
 								public void run() {
@@ -328,7 +331,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 	 *            The callback to run.
 	 */
 	public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
-		mOnRefreshListener = onRefreshListener;
+		setmOnRefreshListener(onRefreshListener);
 	}
 
 	private ImageView addImageView(int id) {
@@ -464,8 +467,19 @@ public class CustomListView extends ListView implements OnScrollListener {
 						.getDrawable();
 				animationDrawable.start();
 				tv_Bottom_Refresh_Text.setText("数据刷新中，请稍候。。。");
+				if (mOnRefreshListener != null) {  
+					mOnRefreshListener.onLoadMore();  
+		        }
 			}
 		}
+	}
+
+	public OnRefreshListener getmOnRefreshListener() {
+		return mOnRefreshListener;
+	}
+
+	public void setmOnRefreshListener(OnRefreshListener mOnRefreshListener) {
+		this.mOnRefreshListener = mOnRefreshListener;
 	}
 
 /*	
