@@ -10,5 +10,6 @@
     <string name="title_activity_test__navi">Test_Navi</string>
     <string name="title_activity_test__fragment">Test_Fragment</string>
     <string name="title_activity_test__custom_view">测试自定义ListView</string>
+    <string name="title_activity_test__sqllite">Test_Sqllite</string>
 
 </resources>

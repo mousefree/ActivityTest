@@ -37,6 +37,7 @@ public class Test_Main extends Activity {
 	private ImageView imgShow;
 	private ImageView iv1Show;
 	private Button btnRefresh;
+	private Button btnSqllite;
 	private AnimationDrawable animationDrawable; 
 	
 	@Override
@@ -47,8 +48,27 @@ public class Test_Main extends Activity {
 		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
 		imgShow = (ImageView)findViewById(R.id.imgShow);
 		iv1Show = (ImageView)findViewById(R.id.iv_Bottom_Refresh_Icon);
+		btnSqllite = (Button)findViewById(R.id.btnSqllite);
+		btnSqllite.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+
+		        Bundle dl = new Bundle();
+		        dl.putString("data1","sqllite");    
+		        intent.putExtras(dl);
+		
+		        intent.setClass(Test_Main.this, Test_Sqllite.class);
+
+		        startActivity(intent);
+			}
+			
+		});
 		btnNum = (Button)findViewById(R.id.btnNum);
 		btnNum.setText("数据" + proNum);
+
 		btnNum.setOnClickListener(new OnClickListener() {
 
 			@Override

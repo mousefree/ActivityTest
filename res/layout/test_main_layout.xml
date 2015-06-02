@@ -107,4 +107,14 @@
         android:layout_alignRight="@+id/btnTestFrameLayout"
         android:text="刷新动画" />
 
+    <Button
+        android:id="@+id/btnSqllite"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRefresh"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/btnTestFrameLayout"
+        android:text="使用sqllite" />
+
 </RelativeLayout>
