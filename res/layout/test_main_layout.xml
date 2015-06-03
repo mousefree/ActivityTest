@@ -117,4 +117,13 @@
         android:layout_toLeftOf="@+id/btnTestFrameLayout"
         android:text="使用sqllite" />
 
+    <Button
+        android:id="@+id/btnTestScrollView"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnTestFrameLayout"
+        android:layout_below="@+id/btnRefresh"
+        android:text="测试ScrollView" />
+
 </RelativeLayout>

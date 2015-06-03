@@ -38,6 +38,7 @@ public class Test_Main extends Activity {
 	private ImageView iv1Show;
 	private Button btnRefresh;
 	private Button btnSqllite;
+	private Button btnTestScrollView;
 	private AnimationDrawable animationDrawable; 
 	
 	@Override
@@ -48,6 +49,25 @@ public class Test_Main extends Activity {
 		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
 		imgShow = (ImageView)findViewById(R.id.imgShow);
 		iv1Show = (ImageView)findViewById(R.id.iv_Bottom_Refresh_Icon);
+		btnTestScrollView = (Button)findViewById(R.id.btnTestScrollView);
+		btnTestScrollView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+
+		        Bundle dl = new Bundle();
+		        dl.putString("data1","TestScrollView");    
+		        intent.putExtras(dl);
+		
+		        intent.setClass(Test_Main.this, Test_ScrollView.class);
+
+		        startActivity(intent);
+			}
+			
+		});
+		
 		btnSqllite = (Button)findViewById(R.id.btnSqllite);
 		btnSqllite.setOnClickListener(new OnClickListener() {
 

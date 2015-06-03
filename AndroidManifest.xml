@@ -58,6 +58,13 @@
             android:name=".Test_Sqllite"
             android:label="@string/title_activity_test__sqllite" >
         </activity>
+        <activity
+            android:name=".Test_ScrollView"
+            android:label="@string/title_activity_test__scroll_view" >
+        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
 
 </manifest>
