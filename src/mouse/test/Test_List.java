@@ -38,6 +38,7 @@ public class Test_List extends Activity {
 		
 		lv1 = (ListView)findViewById(R.id.lv1);
 		ListAdapter la1 = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, get_lv1_Data());
+
 		lv1.setAdapter(la1);
 		
 		lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {

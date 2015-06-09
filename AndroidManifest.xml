@@ -62,6 +62,10 @@
             android:name=".Test_ScrollView"
             android:label="@string/title_activity_test__scroll_view" >
         </activity>
+        <activity
+            android:name=".MainNaviActivity"
+            android:label="@string/title_activity_main_navi" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
