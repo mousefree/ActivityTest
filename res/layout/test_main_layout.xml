@@ -126,4 +126,12 @@
         android:layout_below="@+id/btnRefresh"
         android:text="测试ScrollView" />
 
+    <Button
+        android:id="@+id/btnDialogFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnRefresh"
+        android:layout_alignTop="@+id/btnSqllite"
+        android:text="显示Dialog" />
+
 </RelativeLayout>

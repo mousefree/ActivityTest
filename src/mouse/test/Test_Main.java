@@ -1,6 +1,7 @@
 package mouse.test;
 
 import mouse.test.asynctask.LoginAsyncTask;
+import mouse.test.fragment.Test_DialogFragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -39,6 +40,7 @@ public class Test_Main extends Activity {
 	private Button btnRefresh;
 	private Button btnSqllite;
 	private Button btnTestScrollView;
+	private Button btnDialogFragment;
 	private AnimationDrawable animationDrawable; 
 	
 	@Override
@@ -49,6 +51,22 @@ public class Test_Main extends Activity {
 		pbtest = (ProgressBar)findViewById(R.id.progressBar1);
 		imgShow = (ImageView)findViewById(R.id.imgShow);
 		iv1Show = (ImageView)findViewById(R.id.iv_Bottom_Refresh_Icon);
+		btnDialogFragment = (Button)findViewById(R.id.btnDialogFragment);
+		btnDialogFragment.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Test_DialogFragment Test_Dialog = new Test_DialogFragment();  
+				Bundle args = new Bundle();
+			    args.putString("FID", "0000");
+			    Test_Dialog.setArguments(args);
+				Test_Dialog.show(getFragmentManager(), "EditNameDialog");  
+				
+			}
+			
+		});
+		
 		btnTestScrollView = (Button)findViewById(R.id.btnTestScrollView);
 		btnTestScrollView.setOnClickListener(new OnClickListener() {
 
