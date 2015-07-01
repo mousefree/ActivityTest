@@ -1,6 +1,7 @@
 package mouse.test;
 
 import mouse.test.asynctask.LoginAsyncTask;
+import mouse.test.bluetoothprint.SearchBluetoothActivity;
 import mouse.test.fragment.Test_DialogFragment;
 import android.app.Activity;
 import android.content.Intent;
@@ -41,6 +42,7 @@ public class Test_Main extends Activity {
 	private Button btnSqllite;
 	private Button btnTestScrollView;
 	private Button btnDialogFragment;
+	private Button btnBluetoothPrint;
 	private AnimationDrawable animationDrawable; 
 	
 	@Override
@@ -80,6 +82,25 @@ public class Test_Main extends Activity {
 		        intent.putExtras(dl);
 		
 		        intent.setClass(Test_Main.this, Test_ScrollView.class);
+
+		        startActivity(intent);
+			}
+			
+		});
+		
+		btnBluetoothPrint = (Button)findViewById(R.id.btnBluetoothPrint);
+		btnBluetoothPrint.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+
+		        Bundle dl = new Bundle();
+		        dl.putString("data1","TestScrollView");    
+		        intent.putExtras(dl);
+		
+		        intent.setClass(Test_Main.this, SearchBluetoothActivity.class);
 
 		        startActivity(intent);
 			}

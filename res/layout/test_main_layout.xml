@@ -134,4 +134,13 @@
         android:layout_alignTop="@+id/btnSqllite"
         android:text="显示Dialog" />
 
+    <Button
+        android:id="@+id/btnBluetoothPrint"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnSqllite"
+        android:layout_below="@+id/btnDialogFragment"
+        android:text="蓝牙打印" />
+
 </RelativeLayout>

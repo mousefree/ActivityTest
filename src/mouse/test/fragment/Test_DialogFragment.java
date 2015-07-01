@@ -33,6 +33,7 @@ public class Test_DialogFragment extends DialogFragment {
         showData = (EditText)view.findViewById(R.id.editText1);
         String s = getArguments().getString("FID");
         showData.setText(s);
+        getDialog().setTitle("自定义的标题栏");
         return view;  
     } 
 }

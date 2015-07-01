@@ -66,9 +66,18 @@
             android:name=".MainNaviActivity"
             android:label="@string/title_activity_main_navi" >
         </activity>
+        <activity
+            android:name="mouse.test.bluetoothprint.SearchBluetoothActivity"
+            android:label="@string/title_activity_search_blue_tooth" >
+        </activity>
+        <activity
+            android:name="mouse.test.bluetoothprint.BluetoothPrintActivity"
+            android:label="@string/title_activity_blue_tooth_print" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
     </uses-permission>
-
+	<uses-permission android:name="android.permission.BLUETOOTH" />    
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 </manifest>

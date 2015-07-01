@@ -13,5 +13,7 @@
     <string name="title_activity_test__sqllite">Test_Sqllite</string>
     <string name="title_activity_test__scroll_view">测试ScrollView</string>
     <string name="title_activity_main_navi">MainNaviActivity</string>
+    <string name="title_activity_search_blue_tooth">搜索蓝牙设备</string>
+    <string name="title_activity_blue_tooth_print">蓝牙打印</string>
 
 </resources>
