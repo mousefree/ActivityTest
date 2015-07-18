@@ -1,5 +1,10 @@
 package mouse.test;
 
+/*
+ * 消息机制url
+ * http://blog.csdn.net/liuhe688/article/details/6407225
+ */
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
